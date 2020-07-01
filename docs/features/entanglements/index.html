@@ -115,7 +115,7 @@ We construct link information from the native resources like this:
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ef42c259f12c404ee3fa84ac95f1494cd6ddcc950efd7ce27f36f0b5da4db314520c2b0d2d69e693bc7fb84da9ef5029043f547767fc4ed259dd59e00188729c.json"
+  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
   data-offline-search-base-href="/"
 >
 
@@ -145,7 +145,7 @@ We construct link information from the native resources like this:
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ef42c259f12c404ee3fa84ac95f1494cd6ddcc950efd7ce27f36f0b5da4db314520c2b0d2d69e693bc7fb84da9ef5029043f547767fc4ed259dd59e00188729c.json"
+  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
   data-offline-search-base-href="/"
 >
 
@@ -661,7 +661,7 @@ We construct link information from the native resources like this:
 </tr>
 
 <tr>
-<td>p</td>
+<td>properties</td>
 <td></td>
 <td>properties retrieved from a <em>secret</em> annotated <code>quarks.cloudfoundry.org/provides = LINK_NAME</code></td>
 </tr>
@@ -718,23 +718,25 @@ We construct link information from the native resources like this:
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Secret<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>secretlink<span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>annotations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>labels<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/deployment-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;mydeployment&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>annotations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/provides<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;{&#34;name&#34;:&#34;nats&#34;,&#34;type&#34;:&#34;nats&#34;}&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span>data<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span>link<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#8f5902;font-style:italic">|
-</span><span style="color:#8f5902;font-style:italic">      nats.password: mysecret</span></code></pre></div>
+</span><span style="color:#8f5902;font-style:italic">      nats.user: myuser</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">      </span>nats.password<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>mysecret</code></pre></div>
 <p>Using this secret, the nats release can use <code>link(&quot;nats&quot;).p(&quot;password&quot;)</code> in its eruby templates.</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-eruby" data-lang="eruby">&#34;&lt;%= p(&#34;nats.password&#34;) %&gt;&#34;</code></pre></div>
 <p>Furthermore, if there is a matching k8s service, it will be used in the link:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>v1<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span>kind<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>Service<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span>metadata<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">  </span>annotations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>labels<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/deployment-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#34;mydeployment&#34;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/provides<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#4e9a06">&#39;{&#34;name&#34;:&#34;nats&#34;,&#34;type&#34;:&#34;nats&#34;}&#39;</span><span style="color:#f8f8f8;text-decoration:underline">
-</span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/link-provider-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>secretlink<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">  </span>annotations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">    </span>quarks.cloudfoundry.org/link-provider-name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span>name<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>nats-service<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline"></span>spec<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">  </span>ports<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
