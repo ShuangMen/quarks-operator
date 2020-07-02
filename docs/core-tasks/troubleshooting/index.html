@@ -20,30 +20,27 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Releasing | Quarks project</title><meta property="og:title" content="Releasing" />
-<meta property="og:description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:" />
+<title>Troubleshooting | Quarks project</title><meta property="og:title" content="Troubleshooting" />
+<meta property="og:description" content="Troubleshooting notes for Quarks-operator
+" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/development/releasing/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/troubleshooting/" />
 <meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="Releasing">
-<meta itemprop="description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:">
+<meta itemprop="name" content="Troubleshooting">
+<meta itemprop="description" content="Troubleshooting notes for Quarks-operator
+">
 
 
 
-<meta itemprop="wordCount" content="365">
+<meta itemprop="wordCount" content="187">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Releasing"/>
-<meta name="twitter:description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:"/>
+<meta name="twitter:title" content="Troubleshooting"/>
+<meta name="twitter:description" content="Troubleshooting notes for Quarks-operator
+"/>
 
 
 
@@ -282,10 +279,10 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/core-tasks/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Core tasks</a>
+    <a  href="/docs/core-tasks/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Core tasks</a>
   </li>
   <ul>
-    <li class="collapse " id="docs-core-tasks">
+    <li class="collapse show" id="docs-core-tasks">
       
       
       
@@ -310,7 +307,7 @@ Create new release pipeline We release from release-branches. Each maintained re
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-troubleshooting" href="/docs/core-tasks/troubleshooting/">Troubleshooting</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-core-tasks-troubleshooting" href="/docs/core-tasks/troubleshooting/">Troubleshooting</a>
       
       
     </li>
@@ -329,10 +326,10 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/development/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Development</a>
+    <a  href="/docs/development/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Development</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-development">
+    <li class="collapse " id="docs-development">
       
       
       
@@ -351,7 +348,7 @@ Create new release pipeline We release from release-branches. Each maintained re
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-development-releasing" href="/docs/development/releasing/">Releasing</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-releasing" href="/docs/development/releasing/">Releasing</a>
       
       
       
@@ -551,8 +548,8 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-operator/edit/master/website/content/en/docs/Development/releasing.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new?title=Releasing" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-operator/edit/master/website/content/en/docs/Core%20tasks/troubleshooting.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new?title=Troubleshooting" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 </div>
 
@@ -565,12 +562,10 @@ Create new release pipeline We release from release-branches. Each maintained re
 <ul>
 <li>
 <ul>
-<li><a href="#create-new-release-pipeline">Create new release pipeline</a></li>
-<li><a href="#create-a-new-release">Create a new release</a></li>
-<li><a href="#checklist">Checklist</a>
+<li>
 <ul>
-<li><a href="#major-release">Major Release</a></li>
-<li><a href="#minor-bump">Minor Bump</a></li>
+<li><a href="#cluster-ca">Cluster CA</a></li>
+<li><a href="#recovering-from-a-crash">Recovering from a crash</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -604,14 +599,14 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 
 <li class="breadcrumb-item" >
-	<a href="https://quarks.suse.dev/docs/development/">Development</a>
+	<a href="https://quarks.suse.dev/docs/core-tasks/">Core tasks</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/development/releasing/">Releasing</a>
+	<a href="https://quarks.suse.dev/docs/core-tasks/troubleshooting/">Troubleshooting</a>
 </li>
 
 	</ol>
@@ -619,77 +614,37 @@ Create new release pipeline We release from release-branches. Each maintained re
 
             
 <div class="td-content">
-	<h1>Releasing</h1>
-    
+	<h1>Troubleshooting</h1>
+    <div class="lead">Troubleshooting notes for Quarks-operator</div>
 	       
 	
 
-<p>We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;.
-The release title will be set to this version.</p>
+<h3 id="cluster-ca">Cluster CA</h3>
 
-<p>The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github.
-That job triggers itself, when a draft release is created.</p>
+<p>The <code>cf-operator</code> assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See <a href="https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/" target="_blank">https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/</a> for more information on cluster trust.</p>
 
-<h2 id="create-new-release-pipeline">Create new release pipeline</h2>
+<h3 id="recovering-from-a-crash">Recovering from a crash</h3>
 
-<p>We release from release-branches. Each maintained release has a separate pipeline in Concourse.
-To create a new pipeline run this in the CI repository:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">cd</span> pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4</code></pre></div>
-<p>Where <code>CFO</code> is your concourse target and <code>v0.4.x</code> is the name of the branch.
-The last argument, <code>v0.4</code> is used to filter Github tags, which belong to the release.</p>
+<p>If the operator pod crashes, it cannot be restarted in the same namespace before the existing mutating webhook configuration for that namespace is removed.
+The operator uses mutating webhooks to modify pods on the fly and Kubernetes fails to create pods if the webhook server is unreachable.
+The webhook configurations are installed cluster wide and don&rsquo;t belong to a single namespace, just like custom resources.</p>
 
-<p>This allows a separate Github branch and Concourse pipeline for each major version.
-Within those pipelines, releases can be built from minor versions.</p>
-
-<h2 id="create-a-new-release">Create a new release</h2>
-
-<p>After completion, the pipeline will create several artifacts:</p>
-
-<ul>
-<li>helm chart on S3</li>
-<li>helm chart in our repo at <a href="https://cloudfoundry-incubator.github.io/quarks-helm/" target="_blank">https://cloudfoundry-incubator.github.io/quarks-helm/</a></li>
-<li>cf-operator binary on S3</li>
-<li>docker image of the operator on dockerhub</li>
-</ul>
-
-<p>Running the &lsquo;release&rsquo; job will take the latest artificats, which passed through the pipeline and add them to the Github release:</p>
-
-<ul>
-<li>to the body</li>
-<li>as Github assets for downloading</li>
-</ul>
-
-<p>The version numbers (<code>v0.0.0-&lt;number-of-commits&gt;.&lt;commit-SHA&gt;</code>) of these assets are taken from the info on S3.
-They have to match the Github tag, else the release job will fail.
-The assets will be copied into a &lsquo;release&rsquo; folder on S3.</p>
-
-<p>The docker image is only referenced from the helm chart and not mentioned in the release, though.</p>
-
-<h2 id="checklist">Checklist</h2>
-
-<h3 id="major-release">Major Release</h3>
-
-<ol>
-<li>Create version branch</li>
-<li>Create a new release pipeline for that branch</li>
-<li>Unpause pipeline</li>
-<li>Continue with &ldquo;Minor Bump&rdquo;</li>
-</ol>
-
-<h3 id="minor-bump">Minor Bump</h3>
-
-<ol>
-<li>Tag commit with new version</li>
-<li>Push commit</li>
-<li>Wait for commit to pass release pipeline, &lsquo;publish&rsquo; needs to create the binary and helm chart, before the &lsquo;release&rsquo; job can run</li>
-<li>Create a draft Github release for that tag, &lsquo;release&rsquo; job triggers</li>
-<li>Wait for &lsquo;release&rsquo; job to finish on Concourse</li>
-<li>Edit the draft release on Github and publish it</li>
-</ol>
-
-<p>Try not to push to the pipeline again, until step 4 is completed. The &lsquo;release&rsquo; job will always take the most recent artifacts from S3. Maybe pause the &lsquo;publish&rsquo; job manually to avoid accidental updates.</p>
-
+<p>To remove the webhook configurations for the cf-operator namespace run:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000">CF_OPERATOR_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>cf-operator
+kubectl delete mutatingwebhookconfiguration <span style="color:#4e9a06">&#34;cf-operator-hook-</span><span style="color:#000">$CF_OPERATOR_NAMESPACE</span><span style="color:#4e9a06">&#34;</span>
+kubectl delete validatingwebhookconfiguration <span style="color:#4e9a06">&#34;cf-operator-hook-</span><span style="color:#000">$CF_OPERATOR_NAMESPACE</span><span style="color:#4e9a06">&#34;</span></code></pre></div>
+<p>From <strong>Kubernetes 1.15</strong> onwards, it is possible to instead patch the webhook configurations for the cf-operator namespace via:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#000">CF_OPERATOR_NAMESPACE</span><span style="color:#ce5c00;font-weight:bold">=</span>cf-operator
+kubectl patch mutatingwebhookconfigurations <span style="color:#4e9a06">&#34;cf-operator-hook-</span><span style="color:#000">$CF_OPERATOR_NAMESPACE</span><span style="color:#4e9a06">&#34;</span> -p <span style="color:#4e9a06">&#39;
+</span><span style="color:#4e9a06">webhooks:
+</span><span style="color:#4e9a06">- name: mutate-pods.quarks.cloudfoundry.org
+</span><span style="color:#4e9a06">  objectSelector:
+</span><span style="color:#4e9a06">    matchExpressions:
+</span><span style="color:#4e9a06">    - key: name
+</span><span style="color:#4e9a06">      operator: NotIn
+</span><span style="color:#4e9a06">      values:
+</span><span style="color:#4e9a06">      - &#34;cf-operator&#34;
+</span><span style="color:#4e9a06">&#39;</span></code></pre></div>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">Last modified January 1, 0001

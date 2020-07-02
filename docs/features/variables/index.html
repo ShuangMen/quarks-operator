@@ -20,30 +20,27 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Releasing | Quarks project</title><meta property="og:title" content="Releasing" />
-<meta property="og:description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:" />
+<title>BOSH Variables | Quarks project</title><meta property="og:title" content="BOSH Variables" />
+<meta property="og:description" content="How Quarks-operator interpolates BOSH variables.
+" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/development/releasing/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/features/variables/" />
 <meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="Releasing">
-<meta itemprop="description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:">
+<meta itemprop="name" content="BOSH Variables">
+<meta itemprop="description" content="How Quarks-operator interpolates BOSH variables.
+">
 
 
 
-<meta itemprop="wordCount" content="365">
+<meta itemprop="wordCount" content="117">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Releasing"/>
-<meta name="twitter:description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:"/>
+<meta name="twitter:title" content="BOSH Variables"/>
+<meta name="twitter:description" content="How Quarks-operator interpolates BOSH variables.
+"/>
 
 
 
@@ -329,10 +326,10 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/development/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Development</a>
+    <a  href="/docs/development/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Development</a>
   </li>
   <ul>
-    <li class="collapse show" id="docs-development">
+    <li class="collapse " id="docs-development">
       
       
       
@@ -351,7 +348,7 @@ Create new release pipeline We release from release-branches. Each maintained re
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-development-releasing" href="/docs/development/releasing/">Releasing</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-releasing" href="/docs/development/releasing/">Releasing</a>
       
       
       
@@ -382,17 +379,17 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/features/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Features</a>
+    <a  href="/docs/features/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Features</a>
   </li>
   <ul>
-    <li class="collapse " id="docs-features">
+    <li class="collapse show" id="docs-features">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
       
       
       
@@ -551,8 +548,8 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-operator/edit/master/website/content/en/docs/Development/releasing.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new?title=Releasing" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-operator/edit/master/website/content/en/docs/Features/variables.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new?title=BOSH%20Variables" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 </div>
 
@@ -565,12 +562,10 @@ Create new release pipeline We release from release-branches. Each maintained re
 <ul>
 <li>
 <ul>
-<li><a href="#create-new-release-pipeline">Create new release pipeline</a></li>
-<li><a href="#create-a-new-release">Create a new release</a></li>
-<li><a href="#checklist">Checklist</a>
+<li>
 <ul>
-<li><a href="#major-release">Major Release</a></li>
-<li><a href="#minor-bump">Minor Bump</a></li>
+<li><a href="#implicit-variables">Implicit Variables</a></li>
+<li><a href="#explicit-variables">Explicit Variables</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -604,14 +599,14 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 
 <li class="breadcrumb-item" >
-	<a href="https://quarks.suse.dev/docs/development/">Development</a>
+	<a href="https://quarks.suse.dev/docs/features/">Features</a>
 </li>
 
 
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/development/releasing/">Releasing</a>
+	<a href="https://quarks.suse.dev/docs/features/variables/">BOSH Variables</a>
 </li>
 
 	</ol>
@@ -619,76 +614,29 @@ Create new release pipeline We release from release-branches. Each maintained re
 
             
 <div class="td-content">
-	<h1>Releasing</h1>
-    
+	<h1>BOSH Variables</h1>
+    <div class="lead">How Quarks-operator interpolates BOSH variables.</div>
 	       
 	
 
-<p>We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;.
-The release title will be set to this version.</p>
+<p>BOSH releases consume two types of variables, explicit and implicit ones.</p>
 
-<p>The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github.
-That job triggers itself, when a draft release is created.</p>
+<h3 id="implicit-variables">Implicit Variables</h3>
 
-<h2 id="create-new-release-pipeline">Create new release pipeline</h2>
+<p>Implicit variables have to be created before creating a BOSH deployment resource.
+The <a href="docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml" target="_blank">example</a> creates a secret named <code>var-custom-password</code>. That value will be used to fill <code>((custom-password))</code> place holders in the BOSH manifest.</p>
 
-<p>We release from release-branches. Each maintained release has a separate pipeline in Concourse.
-To create a new pipeline run this in the CI repository:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">cd</span> pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4</code></pre></div>
-<p>Where <code>CFO</code> is your concourse target and <code>v0.4.x</code> is the name of the branch.
-The last argument, <code>v0.4</code> is used to filter Github tags, which belong to the release.</p>
+<p>The name of the secret has to follow this scheme: &lsquo;var-<variable-name>&lsquo;</p>
 
-<p>This allows a separate Github branch and Concourse pipeline for each major version.
-Within those pipelines, releases can be built from minor versions.</p>
+<p>Missing implicit variables are treated as an error.</p>
 
-<h2 id="create-a-new-release">Create a new release</h2>
+<h3 id="explicit-variables">Explicit Variables</h3>
 
-<p>After completion, the pipeline will create several artifacts:</p>
+<p>Explicit variables are explicitly defined in the <a href="https://bosh.io/docs/manifest-v2/#variables" target="_blank">BOSH manifest</a>. They are generated automatically upon deployment and stored in secrets.</p>
 
-<ul>
-<li>helm chart on S3</li>
-<li>helm chart in our repo at <a href="https://cloudfoundry-incubator.github.io/quarks-helm/" target="_blank">https://cloudfoundry-incubator.github.io/quarks-helm/</a></li>
-<li>cf-operator binary on S3</li>
-<li>docker image of the operator on dockerhub</li>
-</ul>
+<p>The naming scheme is the same as for implicit variables.</p>
 
-<p>Running the &lsquo;release&rsquo; job will take the latest artificats, which passed through the pipeline and add them to the Github release:</p>
-
-<ul>
-<li>to the body</li>
-<li>as Github assets for downloading</li>
-</ul>
-
-<p>The version numbers (<code>v0.0.0-&lt;number-of-commits&gt;.&lt;commit-SHA&gt;</code>) of these assets are taken from the info on S3.
-They have to match the Github tag, else the release job will fail.
-The assets will be copied into a &lsquo;release&rsquo; folder on S3.</p>
-
-<p>The docker image is only referenced from the helm chart and not mentioned in the release, though.</p>
-
-<h2 id="checklist">Checklist</h2>
-
-<h3 id="major-release">Major Release</h3>
-
-<ol>
-<li>Create version branch</li>
-<li>Create a new release pipeline for that branch</li>
-<li>Unpause pipeline</li>
-<li>Continue with &ldquo;Minor Bump&rdquo;</li>
-</ol>
-
-<h3 id="minor-bump">Minor Bump</h3>
-
-<ol>
-<li>Tag commit with new version</li>
-<li>Push commit</li>
-<li>Wait for commit to pass release pipeline, &lsquo;publish&rsquo; needs to create the binary and helm chart, before the &lsquo;release&rsquo; job can run</li>
-<li>Create a draft Github release for that tag, &lsquo;release&rsquo; job triggers</li>
-<li>Wait for &lsquo;release&rsquo; job to finish on Concourse</li>
-<li>Edit the draft release on Github and publish it</li>
-</ol>
-
-<p>Try not to push to the pipeline again, until step 4 is completed. The &lsquo;release&rsquo; job will always take the most recent artifacts from S3. Maybe pause the &lsquo;publish&rsquo; job manually to avoid accidental updates.</p>
+<p>If an explicit variable secret already exists, it will not be generated. This allows users to set their own passwords, etc.</p>
 
 	
 	

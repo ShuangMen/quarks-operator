@@ -14,55 +14,6 @@
     
     
     <item>
-      <title>Docs: Build</title>
-      <link>https://quarks.suse.dev/docs/core-tasks/building/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://quarks.suse.dev/docs/core-tasks/building/</guid>
-      <description>
-        
-        
-        
-
-&lt;p&gt;The following steps layout the process of generating a &lt;code&gt;cf-operator&lt;/code&gt; controller and how to install this in your Kubernetes cluster. This is probably a good approach, when developing, as a way to inmediately test your changes.&lt;/p&gt;
-
-&lt;h2 id=&#34;build-it-from-source&#34;&gt;Build it from source&lt;/h2&gt;
-
-&lt;p&gt;Follow this steps to build a proper docker image and generate a deployable helm chart:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Checkout the latest stable release / or run it from develop branch&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git checkout v0.3.0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build the cf-operator binary, this will be embedded later on the docker image&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build the docker image&lt;/p&gt;
-
-&lt;p&gt;When running in minikube, please run: &lt;code&gt;eval $(minikube docker-env)&lt;/code&gt;, to build the image
-directly on minikube docker.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: This will automatically generate a docker image tag based on your current commit, tag and SHA.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Generated helm charts with a proper docker image tag, org and repository&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-helm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: This will generate a new directory under the base dir, named &lt;code&gt;helm/&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install the helm chart(apply Kubernetes Custom Resources)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator-test helm/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: The cf-operator will be available under the namespace set in the context, usually &lt;code&gt;default&lt;/code&gt;, running as a pod.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
-
-&lt;h3 id=&#34;local-development-with-minikube-and-havener&#34;&gt;Local Development with Minikube and Havener&lt;/h3&gt;
-
-&lt;p&gt;Make sure you have &lt;a href=&#34;https://github.com/homeport/havener&#34; target=&#34;_blank&#34;&gt;havener&lt;/a&gt; install.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;havener deploy --config dev-env-havener.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: Install</title>
       <link>https://quarks.suse.dev/docs/core-tasks/install/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -117,6 +68,55 @@ helm install cf-operator quarks/cf-operator --set &lt;span style=&#34;color:#4e9
 &lt;li&gt;secrets for &lt;a href=&#34;docs/from_bosh_to_kube.md#manual-implicit-variables&#34; target=&#34;_blank&#34;&gt;implicit variables&lt;/a&gt; have to be created by the user beforehand anyway, but can also be changed after the initial deployment&lt;/li&gt;
 &lt;/ul&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Build</title>
+      <link>https://quarks.suse.dev/docs/core-tasks/building/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/core-tasks/building/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;The following steps layout the process of generating a &lt;code&gt;cf-operator&lt;/code&gt; controller and how to install this in your Kubernetes cluster. This is probably a good approach, when developing, as a way to inmediately test your changes.&lt;/p&gt;
+
+&lt;h2 id=&#34;build-it-from-source&#34;&gt;Build it from source&lt;/h2&gt;
+
+&lt;p&gt;Follow this steps to build a proper docker image and generate a deployable helm chart:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Checkout the latest stable release / or run it from develop branch&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git checkout v0.3.0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Build the cf-operator binary, this will be embedded later on the docker image&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Build the docker image&lt;/p&gt;
+
+&lt;p&gt;When running in minikube, please run: &lt;code&gt;eval $(minikube docker-env)&lt;/code&gt;, to build the image
+directly on minikube docker.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: This will automatically generate a docker image tag based on your current commit, tag and SHA.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Generated helm charts with a proper docker image tag, org and repository&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-helm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: This will generate a new directory under the base dir, named &lt;code&gt;helm/&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install the helm chart(apply Kubernetes Custom Resources)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;helm install cf-operator-test helm/cf-operator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: The cf-operator will be available under the namespace set in the context, usually &lt;code&gt;default&lt;/code&gt;, running as a pod.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+
+&lt;h3 id=&#34;local-development-with-minikube-and-havener&#34;&gt;Local Development with Minikube and Havener&lt;/h3&gt;
+
+&lt;p&gt;Make sure you have &lt;a href=&#34;https://github.com/homeport/havener&#34; target=&#34;_blank&#34;&gt;havener&lt;/a&gt; install.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;havener deploy --config dev-env-havener.yaml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
@@ -924,6 +924,46 @@ nats-0
 nats-1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Troubleshooting</title>
+      <link>https://quarks.suse.dev/docs/core-tasks/troubleshooting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/core-tasks/troubleshooting/</guid>
+      <description>
+        
+        
+        
+
+&lt;h3 id=&#34;cluster-ca&#34;&gt;Cluster CA&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;cf-operator&lt;/code&gt; assumes that the cluster root CA is also used for signing CSRs via the certificates.k8s.io API and will embed this CA in the generated certificate secrets. If your cluster is set up to use a different cluster-signing CA the generated certificates will have the wrong CA embedded. See &lt;a href=&#34;https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/&#34; target=&#34;_blank&#34;&gt;https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/&lt;/a&gt; for more information on cluster trust.&lt;/p&gt;
+
+&lt;h3 id=&#34;recovering-from-a-crash&#34;&gt;Recovering from a crash&lt;/h3&gt;
+
+&lt;p&gt;If the operator pod crashes, it cannot be restarted in the same namespace before the existing mutating webhook configuration for that namespace is removed.
+The operator uses mutating webhooks to modify pods on the fly and Kubernetes fails to create pods if the webhook server is unreachable.
+The webhook configurations are installed cluster wide and don&amp;rsquo;t belong to a single namespace, just like custom resources.&lt;/p&gt;
+
+&lt;p&gt;To remove the webhook configurations for the cf-operator namespace run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;cf-operator
+kubectl delete mutatingwebhookconfiguration &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cf-operator-hook-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;$CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;
+kubectl delete validatingwebhookconfiguration &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cf-operator-hook-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;$CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;From &lt;strong&gt;Kubernetes 1.15&lt;/strong&gt; onwards, it is possible to instead patch the webhook configurations for the cf-operator namespace via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;cf-operator
+kubectl patch mutatingwebhookconfigurations &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;cf-operator-hook-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;$CF_OPERATOR_NAMESPACE&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&lt;/span&gt; -p &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;webhooks:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;- name: mutate-pods.quarks.cloudfoundry.org
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  objectSelector:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    matchExpressions:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    - key: name
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      operator: NotIn
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      values:
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;      - &amp;#34;cf-operator&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     

@@ -22,16 +22,19 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Development | Quarks project</title><meta property="og:title" content="Development" />
-<meta property="og:description" content="Development documentation for quarks-operator" />
+<meta property="og:description" content="Development documentation notes
+" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/development/" />
 <meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Development">
-<meta itemprop="description" content="Development documentation for quarks-operator">
+<meta itemprop="description" content="Development documentation notes
+">
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Development"/>
-<meta name="twitter:description" content="Development documentation for quarks-operator"/>
+<meta name="twitter:description" content="Development documentation notes
+"/>
 
 
 
@@ -100,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
+  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
   data-offline-search-base-href="/"
 >
 
@@ -118,26 +121,6 @@
 
 
 <div id="td-sidebar-menu" class="td-sidebar__inner">
-  
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-
-
-<input
-  type="search"
-  class="form-control td-search-input"
-  placeholder="&#xf002; Search this site…"
-  aria-label="Search this site…"
-  autocomplete="off"
-  
-  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
-  data-offline-search-base-href="/"
->
-
-
-    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
   
   <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
     
@@ -300,19 +283,25 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-building" href="/docs/core-tasks/building/">Build quarks-operator</a>
-      
-      
-      
-      
-      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-install" href="/docs/core-tasks/install/">Install quarks-operator</a>
       
       
       
       
       
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-building" href="/docs/core-tasks/building/">Build quarks-operator</a>
+      
+      
+      
+      
+      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-from-bosh-to-kube" href="/docs/core-tasks/from_bosh_to_kube/">Transforming BOSH concepts to Kubernetes</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-troubleshooting" href="/docs/core-tasks/troubleshooting/">Troubleshooting</a>
       
       
     </li>
@@ -347,7 +336,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-labels" href="/docs/development/labels/">Labels</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-testing" href="/docs/development/testing/">Testing</a>
       
       
       
@@ -359,7 +348,13 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-testing" href="/docs/development/testing/">Testing</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-labels" href="/docs/development/labels/">Labels</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
       
       
     </li>
@@ -383,6 +378,12 @@
   <ul>
     <li class="collapse " id="docs-features">
       
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
       
       
       
@@ -583,7 +584,7 @@
             
 <div class="td-content">
 	<h1>Development</h1>
-        
+        <div class="lead">Development documentation notes</div>
 	
 	
         <div class="section-index">
@@ -592,34 +593,6 @@
     
     
     <hr class="panel-line">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
         
             
         
@@ -651,6 +624,34 @@
             
         
             
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/development/testing/">Testing</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+                <div class="entry">
+                    <h5>
+                        <a href="/docs/development/releasing/">Releasing</a>
+                    </h5>
+                    <p></p>
+                </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
             
                 <div class="entry">
@@ -666,12 +667,9 @@
             
         
             
-                <div class="entry">
-                    <h5>
-                        <a href="/docs/development/releasing/">Releasing</a>
-                    </h5>
-                    <p></p>
-                </div>
+        
+            
+        
             
         
             
@@ -679,10 +677,26 @@
             
                 <div class="entry">
                     <h5>
-                        <a href="/docs/development/testing/">Testing</a>
+                        <a href="/docs/development/tooling/">Nice tools to use</a>
                     </h5>
-                    <p></p>
+                    <p>Tools to simplify your development workflow</p>
                 </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             

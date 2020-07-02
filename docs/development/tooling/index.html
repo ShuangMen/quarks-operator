@@ -20,30 +20,27 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Releasing | Quarks project</title><meta property="og:title" content="Releasing" />
-<meta property="og:description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:" />
+<title>Nice tools to use | Quarks project</title><meta property="og:title" content="Nice tools to use" />
+<meta property="og:description" content="Tools to simplify your development workflow
+" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://quarks.suse.dev/docs/development/releasing/" />
+<meta property="og:url" content="https://quarks.suse.dev/docs/development/tooling/" />
 <meta property="og:site_name" content="Quarks project" />
-<meta itemprop="name" content="Releasing">
-<meta itemprop="description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:">
+<meta itemprop="name" content="Nice tools to use">
+<meta itemprop="description" content="Tools to simplify your development workflow
+">
 
 
 
-<meta itemprop="wordCount" content="365">
+<meta itemprop="wordCount" content="182">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Releasing"/>
-<meta name="twitter:description" content="We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;. The release title will be set to this version.
-The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github. That job triggers itself, when a draft release is created.
-Create new release pipeline We release from release-branches. Each maintained release has a separate pipeline in Concourse. To create a new pipeline run this in the CI repository:"/>
+<meta name="twitter:title" content="Nice tools to use"/>
+<meta name="twitter:description" content="Tools to simplify your development workflow
+"/>
 
 
 
@@ -351,7 +348,7 @@ Create new release pipeline We release from release-branches. Each maintained re
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-development-releasing" href="/docs/development/releasing/">Releasing</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-releasing" href="/docs/development/releasing/">Releasing</a>
       
       
       
@@ -363,7 +360,7 @@ Create new release pipeline We release from release-branches. Each maintained re
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
       
       
     </li>
@@ -551,8 +548,8 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 
 
-<a href="https://github.com/cloudfoundry-incubator/quarks-operator/edit/master/website/content/en/docs/Development/releasing.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new?title=Releasing" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-operator/edit/master/website/content/en/docs/Development/tooling.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+<a href="https://github.com/cloudfoundry-incubator/quarks-operator/issues/new?title=Nice%20tools%20to%20use" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
 
 </div>
 
@@ -565,12 +562,12 @@ Create new release pipeline We release from release-branches. Each maintained re
 <ul>
 <li>
 <ul>
-<li><a href="#create-new-release-pipeline">Create new release pipeline</a></li>
-<li><a href="#create-a-new-release">Create a new release</a></li>
-<li><a href="#checklist">Checklist</a>
+<li>
 <ul>
-<li><a href="#major-release">Major Release</a></li>
-<li><a href="#minor-bump">Minor Bump</a></li>
+<li><a href="#k9s-https-github-com-derailed-k9s"><a href="https://github.com/derailed/k9s" target="_blank">k9s</a></a></li>
+<li><a href="#havener-https-github-com-homeport-havener"><a href="https://github.com/homeport/havener" target="_blank">havener</a></a></li>
+<li><a href="#stern-https-github-com-wercker-stern"><a href="https://github.com/wercker/stern" target="_blank">stern</a></a></li>
+<li><a href="#kube-dashboard-https-kubernetes-io-docs-tasks-access-application-cluster-web-ui-dashboard"><a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank">kube dashboard</a></a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -611,7 +608,7 @@ Create new release pipeline We release from release-branches. Each maintained re
 
 
 <li class="breadcrumb-item active" aria-current="page">
-	<a href="https://quarks.suse.dev/docs/development/releasing/">Releasing</a>
+	<a href="https://quarks.suse.dev/docs/development/tooling/">Tooling</a>
 </li>
 
 	</ol>
@@ -619,76 +616,54 @@ Create new release pipeline We release from release-branches. Each maintained re
 
             
 <div class="td-content">
-	<h1>Releasing</h1>
-    
+	<h1>Nice tools to use</h1>
+    <div class="lead">Tools to simplify your development workflow</div>
 	       
 	
 
-<p>We&rsquo;re releasing based on tags, which contain our version number. The format is &lsquo;v0.0.0&rsquo;.
-The release title will be set to this version.</p>
+<p>The following is a list of tools with their respective main features that can help you
+to simplify your development work when dealing with <a href="https://github.com/cloudfoundry-incubator/quarks-operator" target="_blank">quarks-operator</a> and <a href="https://github.com/SUSE/kubecf" target="_blank">kubecf</a></p>
 
-<p>The CI pipeline has a &lsquo;release&rsquo; job, which will update the release on Github.
-That job triggers itself, when a draft release is created.</p>
+<h3 id="k9s-https-github-com-derailed-k9s"><a href="https://github.com/derailed/k9s" target="_blank">k9s</a></h3>
 
-<h2 id="create-new-release-pipeline">Create new release pipeline</h2>
-
-<p>We release from release-branches. Each maintained release has a separate pipeline in Concourse.
-To create a new pipeline run this in the CI repository:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#204a87">cd</span> pipelines/cf-operator-release
-./configure.sh CFO v0.4.x v0.4</code></pre></div>
-<p>Where <code>CFO</code> is your concourse target and <code>v0.4.x</code> is the name of the branch.
-The last argument, <code>v0.4</code> is used to filter Github tags, which belong to the release.</p>
-
-<p>This allows a separate Github branch and Concourse pipeline for each major version.
-Within those pipelines, releases can be built from minor versions.</p>
-
-<h2 id="create-a-new-release">Create a new release</h2>
-
-<p>After completion, the pipeline will create several artifacts:</p>
+<p>It provides an easy way to navigate through your k8s resources, while watching lively
+to changes on them. Main features that can be helpful for containerized CF are:</p>
 
 <ul>
-<li>helm chart on S3</li>
-<li>helm chart in our repo at <a href="https://cloudfoundry-incubator.github.io/quarks-helm/" target="_blank">https://cloudfoundry-incubator.github.io/quarks-helm/</a></li>
-<li>cf-operator binary on S3</li>
-<li>docker image of the operator on dockerhub</li>
+<li><p>inmediate access to resources YAMLs definition</p></li>
+
+<li><p>inmediate access to services endpoints</p></li>
+
+<li><p>inmediate access to pods/container logs</p></li>
+
+<li><p>sort resources(e.g. pods) by cpu or memory consumption</p></li>
+
+<li><p>inmediate access to a container secure shell</p></li>
 </ul>
 
-<p>Running the &lsquo;release&rsquo; job will take the latest artificats, which passed through the pipeline and add them to the Github release:</p>
+<h3 id="havener-https-github-com-homeport-havener"><a href="https://github.com/homeport/havener" target="_blank">havener</a></h3>
+
+<p>A tool-kit with different features around k8s and CloudFoundry</p>
 
 <ul>
-<li>to the body</li>
-<li>as Github assets for downloading</li>
+<li><p><code>top</code>, to get an overview on the cpu/memory/load of the cluster, per ns and pods.</p></li>
+
+<li><p><code>logs</code>, to download all logs from all pods into your local system</p></li>
+
+<li><p><code>pod-exec</code>, to open a shell into containers. This can execute cmds in different containers
+simultaneously.</p></li>
+
+<li><p><code>node-exec</code>, to open a shell into nodes. This can execute cmds in different containers
+simultaneously.</p></li>
 </ul>
 
-<p>The version numbers (<code>v0.0.0-&lt;number-of-commits&gt;.&lt;commit-SHA&gt;</code>) of these assets are taken from the info on S3.
-They have to match the Github tag, else the release job will fail.
-The assets will be copied into a &lsquo;release&rsquo; folder on S3.</p>
+<h3 id="stern-https-github-com-wercker-stern"><a href="https://github.com/wercker/stern" target="_blank">stern</a></h3>
 
-<p>The docker image is only referenced from the helm chart and not mentioned in the release, though.</p>
+<p>Allows you to tail multiple pods on k8s and multiple containers within the pod.</p>
 
-<h2 id="checklist">Checklist</h2>
+<h3 id="kube-dashboard-https-kubernetes-io-docs-tasks-access-application-cluster-web-ui-dashboard"><a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" target="_blank">kube dashboard</a></h3>
 
-<h3 id="major-release">Major Release</h3>
-
-<ol>
-<li>Create version branch</li>
-<li>Create a new release pipeline for that branch</li>
-<li>Unpause pipeline</li>
-<li>Continue with &ldquo;Minor Bump&rdquo;</li>
-</ol>
-
-<h3 id="minor-bump">Minor Bump</h3>
-
-<ol>
-<li>Tag commit with new version</li>
-<li>Push commit</li>
-<li>Wait for commit to pass release pipeline, &lsquo;publish&rsquo; needs to create the binary and helm chart, before the &lsquo;release&rsquo; job can run</li>
-<li>Create a draft Github release for that tag, &lsquo;release&rsquo; job triggers</li>
-<li>Wait for &lsquo;release&rsquo; job to finish on Concourse</li>
-<li>Edit the draft release on Github and publish it</li>
-</ol>
-
-<p>Try not to push to the pipeline again, until step 4 is completed. The &lsquo;release&rsquo; job will always take the most recent artifacts from S3. Maybe pause the &lsquo;publish&rsquo; job manually to avoid accidental updates.</p>
+<p>A more user friendly way to navigate your k8s cluster resources.</p>
 
 	
 	

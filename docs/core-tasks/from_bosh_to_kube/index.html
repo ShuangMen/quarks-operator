@@ -21,12 +21,14 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>From BOSH to Kubernetes | Quarks project</title><meta property="og:title" content="From BOSH to Kubernetes" />
-<meta property="og:description" content="Transforming BOSH concepts to Kubernetes  Open Questions Missing Features High-level Direction Deployment Lifecycle Example Deployment Manifest Conversion Details BPM Entrypoint &amp; Environment Variables Resources Health checks Hooks Misc Conversion Details Calculation of docker image location for releases Variables to Quarks Secrets  Overriding generated variables  Instance Groups to Quarks StatefulSets and Jobs  BOSH Services vs BOSH Errands  Miscellaneous Dealing with AZs Support for active/passive pod replicas Ephemeral Disks Credentials for Docker Registries Running manual errands Readiness and Liveness Probes Persistent Disks Manual (&ldquo;implicit&rdquo;) variables Pre_render_scripts BOSH DNS Flow Naming Conventions   Open Questions  How do we rename things going from one version to the next?" />
+<meta property="og:description" content="Guidelines on transforming BOSH concepts to Kubernetes
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/core-tasks/from_bosh_to_kube/" />
 <meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="From BOSH to Kubernetes">
-<meta itemprop="description" content="Transforming BOSH concepts to Kubernetes  Open Questions Missing Features High-level Direction Deployment Lifecycle Example Deployment Manifest Conversion Details BPM Entrypoint &amp; Environment Variables Resources Health checks Hooks Misc Conversion Details Calculation of docker image location for releases Variables to Quarks Secrets  Overriding generated variables  Instance Groups to Quarks StatefulSets and Jobs  BOSH Services vs BOSH Errands  Miscellaneous Dealing with AZs Support for active/passive pod replicas Ephemeral Disks Credentials for Docker Registries Running manual errands Readiness and Liveness Probes Persistent Disks Manual (&ldquo;implicit&rdquo;) variables Pre_render_scripts BOSH DNS Flow Naming Conventions   Open Questions  How do we rename things going from one version to the next?">
+<meta itemprop="description" content="Guidelines on transforming BOSH concepts to Kubernetes
+">
 
 
 
@@ -37,7 +39,8 @@
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="From BOSH to Kubernetes"/>
-<meta name="twitter:description" content="Transforming BOSH concepts to Kubernetes  Open Questions Missing Features High-level Direction Deployment Lifecycle Example Deployment Manifest Conversion Details BPM Entrypoint &amp; Environment Variables Resources Health checks Hooks Misc Conversion Details Calculation of docker image location for releases Variables to Quarks Secrets  Overriding generated variables  Instance Groups to Quarks StatefulSets and Jobs  BOSH Services vs BOSH Errands  Miscellaneous Dealing with AZs Support for active/passive pod replicas Ephemeral Disks Credentials for Docker Registries Running manual errands Readiness and Liveness Probes Persistent Disks Manual (&ldquo;implicit&rdquo;) variables Pre_render_scripts BOSH DNS Flow Naming Conventions   Open Questions  How do we rename things going from one version to the next?"/>
+<meta name="twitter:description" content="Guidelines on transforming BOSH concepts to Kubernetes
+"/>
 
 
 
@@ -106,7 +109,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
+  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
   data-offline-search-base-href="/"
 >
 
@@ -124,26 +127,6 @@
 
 
 <div id="td-sidebar-menu" class="td-sidebar__inner">
-  
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-
-
-<input
-  type="search"
-  class="form-control td-search-input"
-  placeholder="&#xf002; Search this site…"
-  aria-label="Search this site…"
-  autocomplete="off"
-  
-  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
-  data-offline-search-base-href="/"
->
-
-
-    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
   
   <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
     
@@ -306,19 +289,25 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-building" href="/docs/core-tasks/building/">Build quarks-operator</a>
-      
-      
-      
-      
-      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-install" href="/docs/core-tasks/install/">Install quarks-operator</a>
       
       
       
       
       
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-building" href="/docs/core-tasks/building/">Build quarks-operator</a>
+      
+      
+      
+      
+      
       <a class="td-sidebar-link td-sidebar-link__page  active" id="m-docs-core-tasks-from-bosh-to-kube" href="/docs/core-tasks/from_bosh_to_kube/">Transforming BOSH concepts to Kubernetes</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-troubleshooting" href="/docs/core-tasks/troubleshooting/">Troubleshooting</a>
       
       
     </li>
@@ -353,7 +342,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-labels" href="/docs/development/labels/">Labels</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-testing" href="/docs/development/testing/">Testing</a>
       
       
       
@@ -365,7 +354,13 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-testing" href="/docs/development/testing/">Testing</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-labels" href="/docs/development/labels/">Labels</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
       
       
     </li>
@@ -389,6 +384,12 @@
   <ul>
     <li class="collapse " id="docs-features">
       
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
       
       
       
@@ -649,7 +650,7 @@
             
 <div class="td-content">
 	<h1>From BOSH to Kubernetes</h1>
-    
+    <div class="lead">Guidelines on transforming BOSH concepts to Kubernetes</div>
 	       
 	
 

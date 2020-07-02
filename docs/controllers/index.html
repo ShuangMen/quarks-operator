@@ -22,18 +22,18 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Kubernetes Controllers | Quarks project</title><meta property="og:title" content="Kubernetes Controllers" />
-<meta property="og:description" content="This section contains design documents for the Kubernetes controllers that make up the cf-operator.
+<meta property="og:description" content="This section contains design documents for the Kubernetes controllers that make up the quarks-operator
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://quarks.suse.dev/docs/controllers/" />
 <meta property="og:site_name" content="Quarks project" />
 <meta itemprop="name" content="Kubernetes Controllers">
-<meta itemprop="description" content="This section contains design documents for the Kubernetes controllers that make up the cf-operator.
+<meta itemprop="description" content="This section contains design documents for the Kubernetes controllers that make up the quarks-operator
 ">
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Kubernetes Controllers"/>
-<meta name="twitter:description" content="This section contains design documents for the Kubernetes controllers that make up the cf-operator.
+<meta name="twitter:description" content="This section contains design documents for the Kubernetes controllers that make up the quarks-operator
 "/>
 
 
@@ -103,7 +103,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
+  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
   data-offline-search-base-href="/"
 >
 
@@ -121,26 +121,6 @@
 
 
 <div id="td-sidebar-menu" class="td-sidebar__inner">
-  
-  <form class="td-sidebar__search d-flex align-items-center">
-    
-
-
-<input
-  type="search"
-  class="form-control td-search-input"
-  placeholder="&#xf002; Search this site…"
-  aria-label="Search this site…"
-  autocomplete="off"
-  
-  data-offline-search-index-json-src="/offline-search-index.e21d33fd4efe6a4a66fb2f0333fdc2b5db346bec87f11de73e05a14429bc0bf5ad2fbacb7c378145ea9541eadf6aab6647a9bbaff9a991c1b3350b4f5468b4b8.json"
-  data-offline-search-base-href="/"
->
-
-
-    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
-    </button>
-  </form>
   
   <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-section-nav">
     
@@ -303,19 +283,25 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-building" href="/docs/core-tasks/building/">Build quarks-operator</a>
-      
-      
-      
-      
-      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-install" href="/docs/core-tasks/install/">Install quarks-operator</a>
       
       
       
       
       
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-building" href="/docs/core-tasks/building/">Build quarks-operator</a>
+      
+      
+      
+      
+      
       <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-from-bosh-to-kube" href="/docs/core-tasks/from_bosh_to_kube/">Transforming BOSH concepts to Kubernetes</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-core-tasks-troubleshooting" href="/docs/core-tasks/troubleshooting/">Troubleshooting</a>
       
       
     </li>
@@ -350,7 +336,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-labels" href="/docs/development/labels/">Labels</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-testing" href="/docs/development/testing/">Testing</a>
       
       
       
@@ -362,7 +348,13 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-testing" href="/docs/development/testing/">Testing</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-labels" href="/docs/development/labels/">Labels</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-development-tooling" href="/docs/development/tooling/">Tooling</a>
       
       
     </li>
@@ -386,6 +378,12 @@
   <ul>
     <li class="collapse " id="docs-features">
       
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docs-features-variables" href="/docs/features/variables/">BOSH Variables</a>
       
       
       
@@ -554,6 +552,8 @@
 
 
 
+
+
           </div>
           <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
             
@@ -586,9 +586,31 @@
             
 <div class="td-content">
 	<h1>Kubernetes Controllers</h1>
-        <div class="lead">This section contains design documents for the Kubernetes controllers that make up the cf-operator.</div>
+        <div class="lead">This section contains design documents for the Kubernetes controllers that make up the quarks-operator</div>
 	
-	<p>Draw.io with the sources for the <code>quarks_deployment_flow-*png</code> controller charts:</p>
+	
+
+<p>The <code>quarks-operator</code> watches four different types of custom resources:</p>
+
+<ul>
+<li><a href="docs/controllers/bosh_deployment.md" target="_blank">BoshDeployment</a></li>
+<li><a href="https://github.com/cloudfoundry-incubator/quarks-job/blob/master/docs/quarksjob.md" target="_blank">QuarksJob</a></li>
+<li><a href="https://github.com/cloudfoundry-incubator/quarks-secret/blob/master/docs/quarkssecret.md" target="_blank">QuarksSecret</a></li>
+<li><a href="docs/controllers/quarks_statefulset.md" target="_blank">QuarksStatefulSet</a></li>
+</ul>
+
+<p>The <code>cf-operator</code> requires the according CRDs to be installed in the cluster in order to work as expected. By default, the <code>cf-operator</code> applies CRDs in your cluster automatically.</p>
+
+<p>To verify that the CRD´s are installed:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get crds
+NAME                                            CREATED AT
+boshdeployments.quarks.cloudfoundry.org        <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z
+quarksjobs.quarks.cloudfoundry.org           <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z
+quarkssecrets.quarks.cloudfoundry.org        <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z
+quarksstatefulsets.quarks.cloudfoundry.org   <span style="color:#0000cf;font-weight:bold">2019</span>-06-25T07:08:37Z</code></pre></div>
+<h3 id="architecture-design">Architecture design</h3>
+
+<p>Draw.io with the sources for the <code>quarks_deployment_flow-*png</code> controller charts:</p>
 
 <p><a href="https://drive.google.com/file/d/1Uk2h5pOmY-gLtbfpDNO3POTcqI5UdZgj/view?usp=sharing" target="_blank">https://drive.google.com/file/d/1Uk2h5pOmY-gLtbfpDNO3POTcqI5UdZgj/view?usp=sharing</a></p>
 
@@ -598,6 +620,18 @@
     
     
     <hr class="panel-line">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -635,6 +669,10 @@
             
         
             
+        
+            
+        
+            
                 <div class="entry">
                     <h5>
                         <a href="/docs/controllers/quarks_restart/">Quarks restart</a>
@@ -659,16 +697,6 @@
                     </h5>
                     <p>To implement the BOSH behaviour during rollout of a new manifest, an special controller is introduced.</p>
                 </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             

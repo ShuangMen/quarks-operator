@@ -35,6 +35,30 @@
   </url>
   
   <url>
+    <loc>https://quarks.suse.dev/docs/development/development/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/install/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/building/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/testing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/releasing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/core-tasks/from_bosh_to_kube/</loc>
+  </url>
+  
+  <url>
     <loc>https://quarks.suse.dev/docs/concepts/about_operators/</loc>
   </url>
   
@@ -43,11 +67,19 @@
   </url>
   
   <url>
+    <loc>https://quarks.suse.dev/docs/features/variables/</loc>
+  </url>
+  
+  <url>
     <loc>https://quarks.suse.dev/docs/concepts/</loc>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/controllers/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/development/labels/</loc>
   </url>
   
   <url>
@@ -71,11 +103,15 @@
   </url>
   
   <url>
-    <loc>https://quarks.suse.dev/docs/contribution-guidelines/</loc>
+    <loc>https://quarks.suse.dev/docs/core-tasks/troubleshooting/</loc>
   </url>
   
   <url>
-    <loc>https://quarks.suse.dev/docs/core-tasks/building/</loc>
+    <loc>https://quarks.suse.dev/docs/development/tooling/</loc>
+  </url>
+  
+  <url>
+    <loc>https://quarks.suse.dev/docs/contribution-guidelines/</loc>
   </url>
   
   <url>
@@ -91,23 +127,11 @@
   </url>
   
   <url>
-    <loc>https://quarks.suse.dev/docs/development/development/</loc>
-  </url>
-  
-  <url>
     <loc>https://quarks.suse.dev/docs/features/entanglements/</loc>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/docs/features/</loc>
-  </url>
-  
-  <url>
-    <loc>https://quarks.suse.dev/docs/core-tasks/install/</loc>
-  </url>
-  
-  <url>
-    <loc>https://quarks.suse.dev/docs/development/labels/</loc>
   </url>
   
   <url>
@@ -119,19 +143,7 @@
   </url>
   
   <url>
-    <loc>https://quarks.suse.dev/docs/development/releasing/</loc>
-  </url>
-  
-  <url>
     <loc>https://quarks.suse.dev/docs/features/rendering_templates/</loc>
-  </url>
-  
-  <url>
-    <loc>https://quarks.suse.dev/docs/development/testing/</loc>
-  </url>
-  
-  <url>
-    <loc>https://quarks.suse.dev/docs/core-tasks/from_bosh_to_kube/</loc>
   </url>
   
   <url>
@@ -173,17 +185,14 @@
   
   <url>
     <loc>https://quarks.suse.dev/community/</loc>
-    <lastmod>2020-06-25T15:46:30+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/</loc>
-    <lastmod>2020-06-25T15:46:30+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://quarks.suse.dev/search/</loc>
-    <lastmod>2020-06-25T15:46:30+02:00</lastmod>
   </url>
   
 </urlset>

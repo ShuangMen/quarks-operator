@@ -14,6 +14,39 @@
     
     
     <item>
+      <title>Docs: BOSH Variables</title>
+      <link>https://quarks.suse.dev/docs/features/variables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://quarks.suse.dev/docs/features/variables/</guid>
+      <description>
+        
+        
+        
+
+&lt;p&gt;BOSH releases consume two types of variables, explicit and implicit ones.&lt;/p&gt;
+
+&lt;h3 id=&#34;implicit-variables&#34;&gt;Implicit Variables&lt;/h3&gt;
+
+&lt;p&gt;Implicit variables have to be created before creating a BOSH deployment resource.
+The &lt;a href=&#34;docs/examples/bosh-deployment/boshdeployment-with-custom-variable.yaml&#34; target=&#34;_blank&#34;&gt;example&lt;/a&gt; creates a secret named &lt;code&gt;var-custom-password&lt;/code&gt;. That value will be used to fill &lt;code&gt;((custom-password))&lt;/code&gt; place holders in the BOSH manifest.&lt;/p&gt;
+
+&lt;p&gt;The name of the secret has to follow this scheme: &amp;lsquo;var-&lt;variable-name&gt;&amp;lsquo;&lt;/p&gt;
+
+&lt;p&gt;Missing implicit variables are treated as an error.&lt;/p&gt;
+
+&lt;h3 id=&#34;explicit-variables&#34;&gt;Explicit Variables&lt;/h3&gt;
+
+&lt;p&gt;Explicit variables are explicitly defined in the &lt;a href=&#34;https://bosh.io/docs/manifest-v2/#variables&#34; target=&#34;_blank&#34;&gt;BOSH manifest&lt;/a&gt;. They are generated automatically upon deployment and stored in secrets.&lt;/p&gt;
+
+&lt;p&gt;The naming scheme is the same as for implicit variables.&lt;/p&gt;
+
+&lt;p&gt;If an explicit variable secret already exists, it will not be generated. This allows users to set their own passwords, etc.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Docs: Desired Manifests</title>
       <link>https://quarks.suse.dev/docs/features/desired_manifests/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
