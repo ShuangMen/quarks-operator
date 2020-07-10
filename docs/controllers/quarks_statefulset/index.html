@@ -682,12 +682,12 @@
 
 <p>Figure 1 illustrates a <strong>QuarksStatefulset</strong> component diagram that covers the set of controllers it uses.</p>
 
-<p><img src="quarks_estscomponent_flow.png" alt="qsts-component-flow" />
+<p><img src="../quarks_estscomponent_flow.png" alt="qsts-component-flow" />
 <em>Fig. 1: The QuarksStatefulset component</em></p>
 
 <h3 id="quarksstatefulset-controller"><strong><em>QuarksStatefulSet Controller</em></strong></h3>
 
-<p><img src="quarks_eseccontroller_flow.png" alt="qsts-controller-flow" />
+<p><img src="../quarks_eseccontroller_flow.png" alt="qsts-controller-flow" />
 <em>Fig. 2: The QuarksStatefulset controller</em></p>
 
 <p>This controller will generate a Kubernetes statefulset for each <code>instance_group</code> defined in the BOSH manifest. This <code>Statefulset</code> will also include a set of Kubernetes services, so that each component can be accessed on specific ports.</p>
@@ -840,7 +840,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 
 <h3 id="quarksstatefulset-active-passive-controller"><strong><em>QuarksStatefulSet Active-Passive Controller</em></strong></h3>
 
-<p><img src="quarks_estsactivepassivecontroller_flow.png" alt="qsts-activepassivecontroller-flow" />
+<p><img src="../quarks_estsactivepassivecontroller_flow.png" alt="qsts-activepassivecontroller-flow" />
 <em>Fig. 3: The QuarksStatefulset active/passive controller</em></p>
 
 <p>Active/passive model is application model that have multiple running instances, but only one instance is active and all other instances are passive (standby). If the active instance is down, one of the passive instances will be promoted to active immediately.</p>
@@ -875,7 +875,7 @@ The default value for <code>zoneNodeLabel</code> is <code>failure-domain.beta.ku
 
 <h2 id="relationship-with-the-bdpl-component">Relationship with the BDPL component</h2>
 
-<p><img src="quarks_bpm_and_ests_flow.png" alt="bpm-qsts-relationship" />
+<p><img src="../quarks_bpm_and_ests_flow.png" alt="bpm-qsts-relationship" />
 <em>Fig. 4: Relationship with the BPM controller</em></p>
 
 <p>Figure 4 illustrates the interaction of the <strong>BPM</strong> Controller with the <strong>QuarksStatefulSet</strong> Controller. Once the BPM controller consumes the data persisted in secrets from the <code>QuarksJob</code> Component, it will use that data to generate new <code>QuarksStatefulset</code> instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.</p>

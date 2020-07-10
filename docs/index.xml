@@ -2264,7 +2264,7 @@ of the BOSH release on Kubernetes.&lt;/p&gt;
 
 &lt;p&gt;Figure 1 is a &lt;strong&gt;BDPL&lt;/strong&gt; component diagram that covers the set of controllers it uses and their relationship with other components(e.g. &lt;code&gt;QuarksJob&lt;/code&gt;, &lt;code&gt;QuarksSecret&lt;/code&gt; and &lt;code&gt;QuarksStatefulSet&lt;/code&gt;)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_bdplcomponent_flow.png&#34; alt=&#34;bdpl-component-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_bdplcomponent_flow.png&#34; alt=&#34;bdpl-component-flow&#34; /&gt;
 &lt;em&gt;Fig. 1: The BOSHDeployment component&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 1 illustrates a couple of things. Firstly, at the very top, we have the &lt;code&gt;cf-operator&lt;/code&gt; , which is a long running application with a namespaced scope. When the &lt;code&gt;cf-operator&lt;/code&gt; pod is initialized it will automatically register all controllers with the &lt;a href=&#34;https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/&#34; target=&#34;_blank&#34;&gt;Kubernetes Controller Manager&lt;/a&gt;.&lt;/p&gt;
@@ -2273,7 +2273,7 @@ of the BOSH release on Kubernetes.&lt;/p&gt;
 
 &lt;h3 id=&#34;boshdeployment-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;BOSHDeployment Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_bdplcontroller_flow.png&#34; alt=&#34;bdpl-controller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_bdplcontroller_flow.png&#34; alt=&#34;bdpl-controller-flow&#34; /&gt;
 &lt;em&gt;Fig. 2: The BOSHDeployment controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;This is the controller that manages the end user input(a BOSH manifest).&lt;/p&gt;
@@ -2316,8 +2316,9 @@ as the &lt;code&gt;.ig-resolved.&amp;lt;instance_group_name&amp;gt;-v1&lt;/code&
 
 &lt;h3 id=&#34;generate-variables-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;Generate Variables Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_gvariablecontroller_flow.png&#34; alt=&#34;generate-variable-controller-flow&#34; /&gt;
-&lt;em&gt;Fig. 3: The Generated Variables controller&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_gvariablecontroller_flow.png&#34; alt=&#34;quarks_gvariablecontroller_flow.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Fig. 3: The Generated Variables controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;This is the controller that is responsible for auto-generating certificates, passwords and other secrets declared in the manifest. In other words, it translates all BOSH variables into custom Kubernetes primitive resources. It does this with the help of &lt;code&gt;QuarksSecrets&lt;/code&gt;. It watches the &lt;code&gt;.with-ops&lt;/code&gt; secret, retrieves the list of BOSH variables and triggers the generation of &lt;code&gt;QuarksSecrets&lt;/code&gt; per item in that list.&lt;/p&gt;
 
@@ -2339,7 +2340,7 @@ as the &lt;code&gt;.ig-resolved.&amp;lt;instance_group_name&amp;gt;-v1&lt;/code&
 
 &lt;h3 id=&#34;bpm-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;BPM Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_bpm-controller_flow.png&#34; alt=&#34;bpm-controller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_bpm-controller_flow.png&#34; alt=&#34;bpm-controller-flow&#34; /&gt;
 &lt;em&gt;Fig. 4: The BPM controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;The BPM controller has the responsibility to generate Kubernetes resources per &lt;code&gt;instance_group&lt;/code&gt;. It is triggered for each &lt;code&gt;instance_group&lt;/code&gt; in the desired manifest, since we generate one BPM Secret for each. The reconciler starts each &lt;code&gt;instance_group&lt;/code&gt; as its corresponding secret is created. It &lt;em&gt;does not wait&lt;/em&gt; for all secrets to be ready.&lt;/p&gt;
@@ -2708,12 +2709,12 @@ quarks.cloudfoundry.org/remote-id=nats
 
 &lt;p&gt;Figure 1 illustrates a &lt;strong&gt;QuarksStatefulset&lt;/strong&gt; component diagram that covers the set of controllers it uses.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_estscomponent_flow.png&#34; alt=&#34;qsts-component-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_estscomponent_flow.png&#34; alt=&#34;qsts-component-flow&#34; /&gt;
 &lt;em&gt;Fig. 1: The QuarksStatefulset component&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;quarksstatefulset-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;QuarksStatefulSet Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_eseccontroller_flow.png&#34; alt=&#34;qsts-controller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_eseccontroller_flow.png&#34; alt=&#34;qsts-controller-flow&#34; /&gt;
 &lt;em&gt;Fig. 2: The QuarksStatefulset controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;This controller will generate a Kubernetes statefulset for each &lt;code&gt;instance_group&lt;/code&gt; defined in the BOSH manifest. This &lt;code&gt;Statefulset&lt;/code&gt; will also include a set of Kubernetes services, so that each component can be accessed on specific ports.&lt;/p&gt;
@@ -2866,7 +2867,7 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
 
 &lt;h3 id=&#34;quarksstatefulset-active-passive-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;QuarksStatefulSet Active-Passive Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_estsactivepassivecontroller_flow.png&#34; alt=&#34;qsts-activepassivecontroller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_estsactivepassivecontroller_flow.png&#34; alt=&#34;qsts-activepassivecontroller-flow&#34; /&gt;
 &lt;em&gt;Fig. 3: The QuarksStatefulset active/passive controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Active/passive model is application model that have multiple running instances, but only one instance is active and all other instances are passive (standby). If the active instance is down, one of the passive instances will be promoted to active immediately.&lt;/p&gt;
@@ -2901,7 +2902,7 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
 
 &lt;h2 id=&#34;relationship-with-the-bdpl-component&#34;&gt;Relationship with the BDPL component&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_bpm_and_ests_flow.png&#34; alt=&#34;bpm-qsts-relationship&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_bpm_and_ests_flow.png&#34; alt=&#34;bpm-qsts-relationship&#34; /&gt;
 &lt;em&gt;Fig. 4: Relationship with the BPM controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;Figure 4 illustrates the interaction of the &lt;strong&gt;BPM&lt;/strong&gt; Controller with the &lt;strong&gt;QuarksStatefulSet&lt;/strong&gt; Controller. Once the BPM controller consumes the data persisted in secrets from the &lt;code&gt;QuarksJob&lt;/code&gt; Component, it will use that data to generate new &lt;code&gt;QuarksStatefulset&lt;/code&gt; instances. When these resources are generated, the QuarksStatefulSet controller will be watching and trigger its reconciliation loop.&lt;/p&gt;

@@ -696,7 +696,7 @@ of the BOSH release on Kubernetes.</p>
 
 <p>Figure 1 is a <strong>BDPL</strong> component diagram that covers the set of controllers it uses and their relationship with other components(e.g. <code>QuarksJob</code>, <code>QuarksSecret</code> and <code>QuarksStatefulSet</code>)</p>
 
-<p><img src="quarks_bdplcomponent_flow.png" alt="bdpl-component-flow" />
+<p><img src="../quarks_bdplcomponent_flow.png" alt="bdpl-component-flow" />
 <em>Fig. 1: The BOSHDeployment component</em></p>
 
 <p>Figure 1 illustrates a couple of things. Firstly, at the very top, we have the <code>cf-operator</code> , which is a long running application with a namespaced scope. When the <code>cf-operator</code> pod is initialized it will automatically register all controllers with the <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/" target="_blank">Kubernetes Controller Manager</a>.</p>
@@ -705,7 +705,7 @@ of the BOSH release on Kubernetes.</p>
 
 <h3 id="boshdeployment-controller"><strong><em>BOSHDeployment Controller</em></strong></h3>
 
-<p><img src="quarks_bdplcontroller_flow.png" alt="bdpl-controller-flow" />
+<p><img src="../quarks_bdplcontroller_flow.png" alt="bdpl-controller-flow" />
 <em>Fig. 2: The BOSHDeployment controller</em></p>
 
 <p>This is the controller that manages the end user input(a BOSH manifest).</p>
@@ -748,8 +748,9 @@ as the <code>.ig-resolved.&lt;instance_group_name&gt;-v1</code> versioned secret
 
 <h3 id="generate-variables-controller"><strong><em>Generate Variables Controller</em></strong></h3>
 
-<p><img src="quarks_gvariablecontroller_flow.png" alt="generate-variable-controller-flow" />
-<em>Fig. 3: The Generated Variables controller</em></p>
+<p><img src="../quarks_gvariablecontroller_flow.png" alt="quarks_gvariablecontroller_flow.png" /></p>
+
+<p><em>Fig. 3: The Generated Variables controller</em></p>
 
 <p>This is the controller that is responsible for auto-generating certificates, passwords and other secrets declared in the manifest. In other words, it translates all BOSH variables into custom Kubernetes primitive resources. It does this with the help of <code>QuarksSecrets</code>. It watches the <code>.with-ops</code> secret, retrieves the list of BOSH variables and triggers the generation of <code>QuarksSecrets</code> per item in that list.</p>
 
@@ -771,7 +772,7 @@ as the <code>.ig-resolved.&lt;instance_group_name&gt;-v1</code> versioned secret
 
 <h3 id="bpm-controller"><strong><em>BPM Controller</em></strong></h3>
 
-<p><img src="quarks_bpm-controller_flow.png" alt="bpm-controller-flow" />
+<p><img src="../quarks_bpm-controller_flow.png" alt="bpm-controller-flow" />
 <em>Fig. 4: The BPM controller</em></p>
 
 <p>The BPM controller has the responsibility to generate Kubernetes resources per <code>instance_group</code>. It is triggered for each <code>instance_group</code> in the desired manifest, since we generate one BPM Secret for each. The reconciler starts each <code>instance_group</code> as its corresponding secret is created. It <em>does not wait</em> for all secrets to be ready.</p>
