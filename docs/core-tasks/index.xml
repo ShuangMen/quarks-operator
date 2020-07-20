@@ -64,8 +64,8 @@ helm install cf-operator quarks/cf-operator --set &lt;span style=&#34;color:#4e9
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ops files&lt;/code&gt; can be added or removed from the &lt;code&gt;BOSH deployment&lt;/code&gt;. Existing &lt;code&gt;ops file&lt;/code&gt; config maps and secrets can be modified&lt;/li&gt;
-&lt;li&gt;generated secrets for &lt;a href=&#34;docs/from_bosh_to_kube.md#variables-to-quarks-secrets&#34; target=&#34;_blank&#34;&gt;explicit variables&lt;/a&gt; can be modified&lt;/li&gt;
-&lt;li&gt;secrets for &lt;a href=&#34;docs/from_bosh_to_kube.md#manual-implicit-variables&#34; target=&#34;_blank&#34;&gt;implicit variables&lt;/a&gt; have to be created by the user beforehand anyway, but can also be changed after the initial deployment&lt;/li&gt;
+&lt;li&gt;generated secrets for &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#variables-to-quarks-secrets&#34; target=&#34;_blank&#34;&gt;explicit variables&lt;/a&gt; can be modified&lt;/li&gt;
+&lt;li&gt;secrets for &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#manual-implicit-variables&#34; target=&#34;_blank&#34;&gt;implicit variables&lt;/a&gt; have to be created by the user beforehand anyway, but can also be changed after the initial deployment&lt;/li&gt;
 &lt;/ul&gt;
 
       </description>
