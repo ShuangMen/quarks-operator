@@ -299,7 +299,7 @@ as the &lt;code&gt;.ig-resolved.&amp;lt;instance_group_name&amp;gt;-v1&lt;/code&
 
 &lt;h3 id=&#34;quarksstatefulset-controller&#34;&gt;&lt;strong&gt;&lt;em&gt;QuarksStatefulSet Controller&lt;/em&gt;&lt;/strong&gt;&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&#34;../quarks_eseccontroller_flow.png&#34; alt=&#34;qsts-controller-flow&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_estscontroller_flow.png&#34; alt=&#34;qsts-controller-flow&#34; /&gt;
 &lt;em&gt;Fig. 2: The QuarksStatefulset controller&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;This controller will generate a Kubernetes statefulset for each &lt;code&gt;instance_group&lt;/code&gt; defined in the BOSH manifest. This &lt;code&gt;Statefulset&lt;/code&gt; will also include a set of Kubernetes services, so that each component can be accessed on specific ports.&lt;/p&gt;
@@ -352,7 +352,7 @@ The operator watches all the &lt;code&gt;ConfigMaps&lt;/code&gt; and &lt;code&gt
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;targetPort&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4222&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Complete example can be found &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Though, by default, quarks creates three services of type &lt;strong&gt;ClusterIP&lt;/strong&gt; as defined &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#naming-conventions&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; for any instance group.&lt;/p&gt;
+&lt;p&gt;Though, by default, quarks creates three services of type &lt;strong&gt;ClusterIP&lt;/strong&gt; as defined &lt;a href=&#34;../../core-tasks/from_bosh_to_kube/#naming-conventions&#34;&gt;here&lt;/a&gt; for any instance group.&lt;/p&gt;
 
 &lt;h4 id=&#34;load-balancer&#34;&gt;Load Balancer&lt;/h4&gt;
 
@@ -531,7 +531,7 @@ The default value for &lt;code&gt;zoneNodeLabel&lt;/code&gt; is &lt;code&gt;fail
 
 &lt;p&gt;This controller implements the following state machine&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;quarks_sts_rollout_fsm.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../quarks_sts_rollout_fsm.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;known-limitations&#34;&gt;Known Limitations&lt;/h3&gt;
 

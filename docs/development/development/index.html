@@ -32,7 +32,7 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
 
 
 
-<meta itemprop="wordCount" content="1389">
+<meta itemprop="wordCount" content="1391">
 
 
 
@@ -109,7 +109,7 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
+  data-offline-search-index-json-src="/offline-search-index.5ea021e0db949c3a82532cde3f16781b8e5f9e307dd6c00b447e9d9ac7de64de6ebb684bb1687b138b689edc4d12b0cd0c642763e19242fd415515873d58c580.json"
   data-offline-search-base-href="/"
 >
 
@@ -667,7 +667,7 @@ export GO111MODULE=on Custom Resource Definitions (CRDs) Kubernetes allows devel
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">GO111MODULE</span><span style="color:#ce5c00;font-weight:bold">=</span>on</code></pre></div>
 <h2 id="custom-resource-definitions-crds">Custom Resource Definitions (CRDs)</h2>
 
-<p>Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four <a href="../docs/crds">CRDs</a>:</p>
+<p>Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four <a href="https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds" target="_blank">CRDs</a> (see <a href="../../controllers">Controllers</a>):</p>
 
 <ul>
 <li>BOSHDeployment</li>
@@ -949,7 +949,7 @@ docker tag &lt;quarks-job-tag&gt; cfcontainerization/quarks-job:$QUARKS_JOB_IMAG
 
 <h2 id="colourise-logs">Colourise Logs</h2>
 
-<p>Copy the <a href="https://github.com/garabik/grc" target="_blank">grc</a> (generic colouriser grcat) config file <a href="zap.grc.conf" target="_blank">zap.grc.conf</a> to <code>/usr/share/grc/conf.zap</code> and pipe logs to <code>grcat conf.zap</code>:</p>
+<p>Copy the <a href="https://github.com/garabik/grc" target="_blank">grc</a> (generic colouriser grcat) config file <a href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/zap.grc.conf" target="_blank">zap.grc.conf</a> to <code>/usr/share/grc/conf.zap</code> and pipe logs to <code>grcat conf.zap</code>:</p>
 
 <pre><code># install the custom log config
 cp docs/zap.grc.conf /usr/share/grc/conf.zap

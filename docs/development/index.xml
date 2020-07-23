@@ -55,7 +55,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;GO111MODULE&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;on&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;custom-resource-definitions-crds&#34;&gt;Custom Resource Definitions (CRDs)&lt;/h2&gt;
 
-&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;../docs/crds&#34;&gt;CRDs&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Kubernetes allows developers to extend the objects its APIs process and store using Custom Resource Definitions (CRDs). We are creating four &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/tree/master/docs/crds&#34; target=&#34;_blank&#34;&gt;CRDs&lt;/a&gt; (see &lt;a href=&#34;../../controllers&#34;&gt;Controllers&lt;/a&gt;):&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;BOSHDeployment&lt;/li&gt;
@@ -337,7 +337,7 @@ docker tag &amp;lt;quarks-job-tag&amp;gt; cfcontainerization/quarks-job:$QUARKS_
 
 &lt;h2 id=&#34;colourise-logs&#34;&gt;Colourise Logs&lt;/h2&gt;
 
-&lt;p&gt;Copy the &lt;a href=&#34;https://github.com/garabik/grc&#34; target=&#34;_blank&#34;&gt;grc&lt;/a&gt; (generic colouriser grcat) config file &lt;a href=&#34;zap.grc.conf&#34; target=&#34;_blank&#34;&gt;zap.grc.conf&lt;/a&gt; to &lt;code&gt;/usr/share/grc/conf.zap&lt;/code&gt; and pipe logs to &lt;code&gt;grcat conf.zap&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Copy the &lt;a href=&#34;https://github.com/garabik/grc&#34; target=&#34;_blank&#34;&gt;grc&lt;/a&gt; (generic colouriser grcat) config file &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/zap.grc.conf&#34; target=&#34;_blank&#34;&gt;zap.grc.conf&lt;/a&gt; to &lt;code&gt;/usr/share/grc/conf.zap&lt;/code&gt; and pipe logs to &lt;code&gt;grcat conf.zap&lt;/code&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;# install the custom log config
 cp docs/zap.grc.conf /usr/share/grc/conf.zap
@@ -558,7 +558,7 @@ kubectl get mutatingwebhookconfiguration -oname &lt;span style=&#34;color:#000;f
 &lt;p&gt;First set the version to something static, not dependant on git:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#204a87&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;DOCKER_IMAGE_TAG&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;dev&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bin/build-image&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Or if you have local changes and use &lt;code&gt;go mod edit --replace&lt;/code&gt;,
-follow instructions from &lt;a href=&#34;development.md#standalone-components&#34; target=&#34;_blank&#34;&gt;development&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+follow instructions from &lt;a href=&#34;../../development/development#standalone-components&#34;&gt;development&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Load image into KinD&lt;/p&gt;
 
@@ -574,7 +574,7 @@ follow instructions from &lt;a href=&#34;development.md#standalone-components&#3
 
 &lt;p&gt;&lt;code&gt;kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;(see &lt;a href=&#34;development.md#standalone-components&#34; target=&#34;_blank&#34;&gt;development&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;(see &lt;a href=&#34;../../development/development#standalone-components&#34;&gt;development&lt;/a&gt;).&lt;/p&gt;
 
 &lt;h2 id=&#34;makefile&#34;&gt;Makefile&lt;/h2&gt;
 

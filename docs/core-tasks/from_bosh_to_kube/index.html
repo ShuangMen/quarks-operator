@@ -109,7 +109,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
+  data-offline-search-index-json-src="/offline-search-index.5ea021e0db949c3a82532cde3f16781b8e5f9e307dd6c00b447e9d9ac7de64de6ebb684bb1687b138b689edc4d12b0cd0c642763e19242fd415515873d58c580.json"
   data-offline-search-base-href="/"
 >
 
@@ -717,14 +717,14 @@
 <li>each instance group is transformed to an <code>QuarksStatefulSet</code> or an <code>QuarksJob</code></li>
 <li>each BOSH Job corresponds to one or more containers in the <code>Pod</code> template defined in the <code>QuarksStatefulSet</code> or the <code>QuarksJob</code>; there&rsquo;s one container for each process defined in the BPM information of each BOSH Job</li>
 <li>&ldquo;explicit&rdquo; <code>variables</code> are generated using <code>QuarksSecrets</code></li>
-<li>for rendering of BOSH Job Templates, please read <a href="rendering_templates.md" target="_blank">this document</a></li>
-<li>we have a concept of <a href="desired_manifests.md" target="_blank">Desired Manifests</a></li>
-<li>all communication happens through Kubernetes <code>Services</code>, which have deterministic DNS Addresses; you can read more about these <a href="rendering_templates.md#services-and-dns-addresses" target="_blank">here</a></li>
+<li>for rendering of BOSH Job Templates, please read <a href="../../features/rendering_templates">this document</a></li>
+<li>we have a concept of <a href="../../features/desired_manifests">Desired Manifests</a></li>
+<li>all communication happens through Kubernetes <code>Services</code>, which have deterministic DNS Addresses; you can read more about these <a href="../../features/rendering_templates#services-and-dns-addresses">here</a></li>
 </ul>
 
 <h2 id="deployment-lifecycle">Deployment Lifecycle</h2>
 
-<p>Please read the <a href="controllers/bosh_deployment.md" target="_blank">documentation for the <code>BOSHDeployment</code> controller</a>.</p>
+<p>Please read the <a href="../../controllers/bosh_deployment">documentation for the <code>BOSHDeployment</code> controller</a>.</p>
 
 <h2 id="example-deployment-manifest-conversion-details">Example Deployment Manifest Conversion Details</h2>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---<span style="color:#f8f8f8;text-decoration:underline">
@@ -1259,7 +1259,7 @@ The <code>QuarksSecret</code> is meant to generate the value required by the var
 
 <p>Each secret must contain the usual keys used in explicit variables (see <a href="https://bosh.io/docs/variable-types/" target="_blank">here</a> for more details).</p>
 
-<p>You can find an example <a href="examples/bosh-deployment/boshdeployment-with-user-variable.yaml" target="_blank">here</a>.</p>
+<p>You can find an example <a href="https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-user-variable.yaml" target="_blank">here</a>.</p>
 
 <h3 id="instance-groups-to-quarks-statefulsets-and-jobs">Instance Groups to Quarks StatefulSets and Jobs</h3>
 
@@ -1275,11 +1275,11 @@ The <code>QuarksSecret</code> is meant to generate the value required by the var
 
 <h3 id="dealing-with-azs">Dealing with AZs</h3>
 
-<p><code>QuarksStatefulSets</code> support AZs. You can learn more about this in <a href="controllers/quarks_statefulset.md#az-support" target="_blank">the docs</a>.</p>
+<p><code>QuarksStatefulSets</code> support AZs. You can learn more about this in <a href="../../controllers/quarks_statefulset#az-support">the docs</a>.</p>
 
 <h3 id="support-for-active-passive-pod-replicas">Support for active/passive pod replicas</h3>
 
-<p><code>QuarksStatefulSets</code> support active/passive pod replicas. You can learn more about this in <a href="controllers/quarks_statefulset.md#quarksstatefulset-active-passive-controller" target="_blank">the docs</a>.</p>
+<p><code>QuarksStatefulSets</code> support active/passive pod replicas. You can learn more about this in <a href="../../controllers/quarks_statefulset#quarksstatefulset-active-passive-controller">the docs</a>.</p>
 
 <h3 id="ephemeral-disks">Ephemeral Disks</h3>
 

@@ -194,14 +194,14 @@ directly on minikube docker.&lt;/p&gt;
 &lt;li&gt;each instance group is transformed to an &lt;code&gt;QuarksStatefulSet&lt;/code&gt; or an &lt;code&gt;QuarksJob&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;each BOSH Job corresponds to one or more containers in the &lt;code&gt;Pod&lt;/code&gt; template defined in the &lt;code&gt;QuarksStatefulSet&lt;/code&gt; or the &lt;code&gt;QuarksJob&lt;/code&gt;; there&amp;rsquo;s one container for each process defined in the BPM information of each BOSH Job&lt;/li&gt;
 &lt;li&gt;&amp;ldquo;explicit&amp;rdquo; &lt;code&gt;variables&lt;/code&gt; are generated using &lt;code&gt;QuarksSecrets&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;for rendering of BOSH Job Templates, please read &lt;a href=&#34;rendering_templates.md&#34; target=&#34;_blank&#34;&gt;this document&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;we have a concept of &lt;a href=&#34;desired_manifests.md&#34; target=&#34;_blank&#34;&gt;Desired Manifests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;all communication happens through Kubernetes &lt;code&gt;Services&lt;/code&gt;, which have deterministic DNS Addresses; you can read more about these &lt;a href=&#34;rendering_templates.md#services-and-dns-addresses&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;for rendering of BOSH Job Templates, please read &lt;a href=&#34;../../features/rendering_templates&#34;&gt;this document&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;we have a concept of &lt;a href=&#34;../../features/desired_manifests&#34;&gt;Desired Manifests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;all communication happens through Kubernetes &lt;code&gt;Services&lt;/code&gt;, which have deterministic DNS Addresses; you can read more about these &lt;a href=&#34;../../features/rendering_templates#services-and-dns-addresses&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;deployment-lifecycle&#34;&gt;Deployment Lifecycle&lt;/h2&gt;
 
-&lt;p&gt;Please read the &lt;a href=&#34;controllers/bosh_deployment.md&#34; target=&#34;_blank&#34;&gt;documentation for the &lt;code&gt;BOSHDeployment&lt;/code&gt; controller&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Please read the &lt;a href=&#34;../../controllers/bosh_deployment&#34;&gt;documentation for the &lt;code&gt;BOSHDeployment&lt;/code&gt; controller&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;example-deployment-manifest-conversion-details&#34;&gt;Example Deployment Manifest Conversion Details&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
@@ -736,7 +736,7 @@ The &lt;code&gt;QuarksSecret&lt;/code&gt; is meant to generate the value require
 
 &lt;p&gt;Each secret must contain the usual keys used in explicit variables (see &lt;a href=&#34;https://bosh.io/docs/variable-types/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; for more details).&lt;/p&gt;
 
-&lt;p&gt;You can find an example &lt;a href=&#34;examples/bosh-deployment/boshdeployment-with-user-variable.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can find an example &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/master/docs/examples/bosh-deployment/boshdeployment-with-user-variable.yaml&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;instance-groups-to-quarks-statefulsets-and-jobs&#34;&gt;Instance Groups to Quarks StatefulSets and Jobs&lt;/h3&gt;
 
@@ -752,11 +752,11 @@ The &lt;code&gt;QuarksSecret&lt;/code&gt; is meant to generate the value require
 
 &lt;h3 id=&#34;dealing-with-azs&#34;&gt;Dealing with AZs&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;controllers/quarks_statefulset.md#az-support&#34; target=&#34;_blank&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support AZs. You can learn more about this in &lt;a href=&#34;../../controllers/quarks_statefulset#az-support&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;support-for-active-passive-pod-replicas&#34;&gt;Support for active/passive pod replicas&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;controllers/quarks_statefulset.md#quarksstatefulset-active-passive-controller&#34; target=&#34;_blank&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;QuarksStatefulSets&lt;/code&gt; support active/passive pod replicas. You can learn more about this in &lt;a href=&#34;../../controllers/quarks_statefulset#quarksstatefulset-active-passive-controller&#34;&gt;the docs&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;ephemeral-disks&#34;&gt;Ephemeral Disks&lt;/h3&gt;
 

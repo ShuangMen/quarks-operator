@@ -109,7 +109,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
+  data-offline-search-index-json-src="/offline-search-index.5ea021e0db949c3a82532cde3f16781b8e5f9e307dd6c00b447e9d9ac7de64de6ebb684bb1687b138b689edc4d12b0cd0c642763e19242fd415515873d58c580.json"
   data-offline-search-base-href="/"
 >
 
@@ -687,7 +687,7 @@
 
 <h3 id="quarksstatefulset-controller"><strong><em>QuarksStatefulSet Controller</em></strong></h3>
 
-<p><img src="../quarks_eseccontroller_flow.png" alt="qsts-controller-flow" />
+<p><img src="../quarks_estscontroller_flow.png" alt="qsts-controller-flow" />
 <em>Fig. 2: The QuarksStatefulset controller</em></p>
 
 <p>This controller will generate a Kubernetes statefulset for each <code>instance_group</code> defined in the BOSH manifest. This <code>Statefulset</code> will also include a set of Kubernetes services, so that each component can be accessed on specific ports.</p>
@@ -740,7 +740,7 @@ The operator watches all the <code>ConfigMaps</code> and <code>Secrets</code> re
 </span><span style="color:#f8f8f8;text-decoration:underline">      </span>targetPort<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">4222</span></code></pre></div>
 <p>Complete example can be found <a href="https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment/boshdeployment-with-service.yaml" target="_blank">here</a>.</p>
 
-<p>Though, by default, quarks creates three services of type <strong>ClusterIP</strong> as defined <a href="https://github.com/cloudfoundry-incubator/cf-operator/blob/master/docs/from_bosh_to_kube.md#naming-conventions" target="_blank">here</a> for any instance group.</p>
+<p>Though, by default, quarks creates three services of type <strong>ClusterIP</strong> as defined <a href="../../core-tasks/from_bosh_to_kube/#naming-conventions">here</a> for any instance group.</p>
 
 <h4 id="load-balancer">Load Balancer</h4>
 

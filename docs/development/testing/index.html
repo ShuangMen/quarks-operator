@@ -115,7 +115,7 @@ We use ginkgo for testing. Every package needs a suite_test."/>
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ba269d98914dadaeb5fb6a70e4b55485294286e740b14599820b8f6578fdc86cb3619514fb05ff16b84fc3d04fc4d70d77ddca13a9adace64a899e0c76ae2c07.json"
+  data-offline-search-index-json-src="/offline-search-index.5ea021e0db949c3a82532cde3f16781b8e5f9e307dd6c00b447e9d9ac7de64de6ebb684bb1687b138b689edc4d12b0cd0c642763e19242fd415515873d58c580.json"
   data-offline-search-base-href="/"
 >
 
@@ -837,7 +837,7 @@ kubectl get mutatingwebhookconfiguration -oname <span style="color:#000;font-wei
 <p>First set the version to something static, not dependant on git:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">export</span> <span style="color:#000">DOCKER_IMAGE_TAG</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">${</span><span style="color:#000">DOCKER_IMAGE_TAG</span><span style="color:#204a87;font-weight:bold">:-</span><span style="color:#000">dev</span><span style="color:#4e9a06">}</span></code></pre></div><div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/build-image</code></pre></div>
 <p>Or if you have local changes and use <code>go mod edit --replace</code>,
-follow instructions from <a href="development.md#standalone-components" target="_blank">development</a>.</p></li>
+follow instructions from <a href="../../development/development#standalone-components">development</a>.</p></li>
 
 <li><p>Load image into KinD</p>
 
@@ -853,7 +853,7 @@ follow instructions from <a href="development.md#standalone-components" target="
 
 <p><code>kind load docker-image cfcontainerization/quarks-job:$QUARKS_JOB_IMAGE_TAG</code></p>
 
-<p>(see <a href="development.md#standalone-components" target="_blank">development</a>).</p>
+<p>(see <a href="../../development/development#standalone-components">development</a>).</p>
 
 <h2 id="makefile">Makefile</h2>
 
