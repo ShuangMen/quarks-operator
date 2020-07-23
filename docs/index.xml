@@ -2240,6 +2240,7 @@ nats-1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#bdpl-abstract-view&#34;&gt;BDPL Abstract view&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#boshdeployment-resource-examples&#34;&gt;BOSHDeployment resource examples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[BOSHDeployment status][#boshdeployment-status]&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -2384,6 +2385,43 @@ as the &lt;code&gt;.ig-resolved.&amp;lt;instance_group_name&amp;gt;-v1&lt;/code&
 &lt;h2 id=&#34;boshdeployment-resource-examples&#34;&gt;BOSHDeployment resource examples&lt;/h2&gt;
 
 &lt;p&gt;See &lt;a href=&#34;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment&#34; target=&#34;_blank&#34;&gt;https://github.com/cloudfoundry-incubator/cf-operator/tree/master/docs/examples/bosh-deployment&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;boshdeployment-status&#34;&gt;BOSHDeployment status&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;BOSHDeployment&lt;/code&gt; status is resolved by a &lt;a href=&#34;https://github.com/cloudfoundry-incubator/quarks-operator/blob/c6480811376faf81d6edadb62fcd0c7951e173c1/pkg/kube/controllers/boshdeployment/status_reconciler.go&#34; target=&#34;_blank&#34;&gt;separate controller&lt;/a&gt; which tracks the status of &lt;code&gt;QuarksJob&lt;/code&gt; and &lt;code&gt;QuarksStatefulSet&lt;/code&gt; associated with a deployment.
+The controller annotates the instance groups and the jobs counters and it resolves the BDPL State (&lt;code&gt;Deployed&lt;/code&gt;, &lt;code&gt;Converting&lt;/code&gt; , &lt;code&gt;Resolving&lt;/code&gt;) by looking at the associated resources states and computing the overall state.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;BOSHDeployment&lt;/code&gt; status spec is composed of the following fields:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// BOSHDeploymentStatus defines the observed state of BOSHDeployment
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;BOSHDeploymentStatus&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Timestamp for the last reconcile
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;LastReconcile&lt;/span&gt;          &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;metav1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Time&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;lastReconcile&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;State&lt;/span&gt;                  &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;       &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;state&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;Message&lt;/span&gt;                &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;string&lt;/span&gt;       &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;message&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;TotalJobCount&lt;/span&gt;          &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;totalJobCount&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;CompletedJobCount&lt;/span&gt;      &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;completedJobCount&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;TotalInstanceGroups&lt;/span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;totalInstanceGroups&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;DeployedInstanceGroups&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;int&lt;/span&gt;          &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;deployedInstanceGroups&amp;#34;`&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;StateTimestamp&lt;/span&gt;         &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;metav1&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Time&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;`json:&amp;#34;stateTimestamp&amp;#34;`&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;BOSHDeployment&lt;/code&gt; States can be:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Created&lt;/li&gt;
+&lt;li&gt;Converting to Kubernetes Resources&lt;/li&gt;
+&lt;li&gt;Resolving Manifest&lt;/li&gt;
+&lt;li&gt;Deployed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;where &amp;ldquo;Deployed&amp;rdquo; is the final state. Note that during deployments, the lifecycle might vary if the same resources are updated subsequently: the status of a &lt;code&gt;BOSHDeployment&lt;/code&gt; may go back from &lt;code&gt;Deployed&lt;/code&gt; to &lt;code&gt;Converting&lt;/code&gt; and &lt;code&gt;Resolving&lt;/code&gt; again if updates to the manifest are triggered.&lt;/p&gt;
+
+&lt;p&gt;The Reconcile resolves to the Deployed state by looking at the overall counts of &lt;code&gt;QuarksJobs&lt;/code&gt; and &lt;code&gt;QuarksStatefulSet&lt;/code&gt; associated to the &lt;code&gt;BOSHDeployment&lt;/code&gt; and its state:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Converting&lt;/code&gt;: All &lt;code&gt;QuarksJobs&lt;/code&gt; belonging to a &lt;code&gt;BOSHDeployment&lt;/code&gt; are completed, but &lt;code&gt;QuarksStatefulSet&lt;/code&gt; aren&amp;rsquo;t ready yet ( or either way around )&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Resolving&lt;/code&gt;: &lt;code&gt;QuarksJobs&lt;/code&gt; belonging to a &lt;code&gt;BOSHDeployment&lt;/code&gt; aren&amp;rsquo;t completed, &lt;code&gt;QuarksStatefulSet&lt;/code&gt; aren&amp;rsquo;t ready yet&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Deployed&lt;/code&gt;: All &lt;code&gt;QuarksJobs&lt;/code&gt; and &lt;code&gt;QuarksStatefulSet&lt;/code&gt; are ready/completed.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
