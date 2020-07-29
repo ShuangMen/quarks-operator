@@ -32,7 +32,7 @@
 
 
 
-<meta itemprop="wordCount" content="3195">
+<meta itemprop="wordCount" content="3206">
 
 
 
@@ -109,7 +109,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/offline-search-index.ef2de3c31a66971cfbac4ed7f5df767d4a501e8577074bc568f41d6eba3bc1e78571c6baa70be523843d34d158484de2a65780aea3a7a1fbe9fa11332db2e2a3.json"
+  data-offline-search-index-json-src="/offline-search-index.551536d46d02e562ab8d9058ac8767aea27af9a3db412f1f428f60babe940f58c7cf9d43262d83c744448ff191883451aafa55e621b68e1837c93d454d16dd03.json"
   data-offline-search-base-href="/"
 >
 
@@ -655,33 +655,32 @@
 	
 
 <ul>
-<li><a href="#transforming-bosh-concepts-to-kubernetes">Transforming BOSH concepts to Kubernetes</a>
-
-<ul>
 <li><a href="#open-questions">Open Questions</a></li>
 <li><a href="#missing-features">Missing Features</a></li>
 <li><a href="#high-level-direction">High-level Direction</a></li>
 <li><a href="#deployment-lifecycle">Deployment Lifecycle</a></li>
 <li><a href="#example-deployment-manifest-conversion-details">Example Deployment Manifest Conversion Details</a></li>
-<li><a href="#bpm">BPM</a></li>
+<li><a href="#bpm">BPM</a>
+
+<ul>
 <li><a href="#entrypoint--environment-variables">Entrypoint &amp; Environment Variables</a></li>
 <li><a href="#resources">Resources</a></li>
 <li><a href="#health-checks">Health checks</a></li>
 <li><a href="#hooks">Hooks</a></li>
 <li><a href="#misc">Misc</a></li>
-<li><a href="#conversion-details">Conversion Details</a></li>
-<li><a href="#calculation-of-docker-image-location-for-releases">Calculation of docker image location for releases</a></li>
-<li><a href="#variables-to-quarks-secrets">Variables to Quarks Secrets</a>
-
-<ul>
-<li><a href="#overriding-generated-variables">Overriding generated variables</a></li>
 </ul></li>
-<li><a href="#instance-groups-to-quarks-statefulsets-and-jobs">Instance Groups to Quarks StatefulSets and Jobs</a>
+<li><a href="#conversion-details">Conversion Details</a>
 
 <ul>
+<li><a href="#calculation-of-docker-image-location-for-releases">Calculation of docker image location for releases</a></li>
+<li><a href="#variables-to-quarks-secrets">Variables to Quarks Secrets</a></li>
+<li><a href="#overriding-generated-variables">Overriding generated variables</a></li>
+<li><a href="#instance-groups-to-quarks-statefulsets-and-jobs">Instance Groups to Quarks StatefulSets and Jobs</a></li>
 <li><a href="#bosh-services-vs-bosh-errands">BOSH Services vs BOSH Errands</a></li>
 </ul></li>
-<li><a href="#miscellaneous">Miscellaneous</a></li>
+<li><a href="#miscellaneous">Miscellaneous</a>
+
+<ul>
 <li><a href="#dealing-with-azs">Dealing with AZs</a></li>
 <li><a href="#support-for-activepassive-pod-replicas">Support for active/passive pod replicas</a></li>
 <li><a href="#ephemeral-disks">Ephemeral Disks</a></li>
@@ -689,12 +688,12 @@
 <li><a href="#running-manual-errands">Running manual errands</a></li>
 <li><a href="#readiness-and-liveness-probes">Readiness and Liveness Probes</a></li>
 <li><a href="#persistent-disks">Persistent Disks</a></li>
-<li><a href="#manual-%22implicit%22-variables">Manual (&ldquo;implicit&rdquo;) variables</a></li>
-<li><a href="#prerenderscripts">Pre_render_scripts</a></li>
+<li><a href="#manual-implicit-variables">Manual (&ldquo;implicit&rdquo;) variables</a></li>
+<li><a href="#pre_render_scripts">Pre_render_scripts</a></li>
 <li><a href="#bosh-dns">BOSH DNS</a></li>
+</ul></li>
 <li><a href="#flow">Flow</a></li>
 <li><a href="#naming-conventions">Naming Conventions</a></li>
-</ul></li>
 </ul>
 
 <h2 id="open-questions">Open Questions</h2>
@@ -968,6 +967,16 @@
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span>labels<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#8f5902;font-style:italic"># Annotations to add to the resources representing the instance group</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span>annotations<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#8f5902;font-style:italic"># Ops files that are applied on top of instance group properties yaml or BPM data yaml</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">          </span>preRenderOps<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>bpm<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>replace<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>path<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/foo<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>value<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>bar<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>instanceGroup<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">            </span>-<span style="color:#f8f8f8;text-decoration:underline"> </span>type<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>replace<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>path<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>/foo<span style="color:#f8f8f8;text-decoration:underline">
+</span><span style="color:#f8f8f8;text-decoration:underline">              </span>value<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>bar<span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#8f5902;font-style:italic"># disable_log_sidecar is an option to disable log sidecar</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span>disable_log_sidecar<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#204a87;font-weight:bold">false</span><span style="color:#f8f8f8;text-decoration:underline">
 </span><span style="color:#f8f8f8;text-decoration:underline">          </span><span style="color:#8f5902;font-style:italic"># serviceAccountName is the name of the ServiceAccount to use to run this pod.</span><span style="color:#f8f8f8;text-decoration:underline">

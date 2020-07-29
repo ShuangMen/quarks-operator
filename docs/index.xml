@@ -1306,33 +1306,32 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
         
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#transforming-bosh-concepts-to-kubernetes&#34;&gt;Transforming BOSH concepts to Kubernetes&lt;/a&gt;
-
-&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#open-questions&#34;&gt;Open Questions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#missing-features&#34;&gt;Missing Features&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#high-level-direction&#34;&gt;High-level Direction&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#deployment-lifecycle&#34;&gt;Deployment Lifecycle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#example-deployment-manifest-conversion-details&#34;&gt;Example Deployment Manifest Conversion Details&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#bpm&#34;&gt;BPM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#bpm&#34;&gt;BPM&lt;/a&gt;
+
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#entrypoint--environment-variables&#34;&gt;Entrypoint &amp;amp; Environment Variables&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#resources&#34;&gt;Resources&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#health-checks&#34;&gt;Health checks&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#hooks&#34;&gt;Hooks&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#misc&#34;&gt;Misc&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#conversion-details&#34;&gt;Conversion Details&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#calculation-of-docker-image-location-for-releases&#34;&gt;Calculation of docker image location for releases&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#variables-to-quarks-secrets&#34;&gt;Variables to Quarks Secrets&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#overriding-generated-variables&#34;&gt;Overriding generated variables&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#instance-groups-to-quarks-statefulsets-and-jobs&#34;&gt;Instance Groups to Quarks StatefulSets and Jobs&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#conversion-details&#34;&gt;Conversion Details&lt;/a&gt;
 
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#calculation-of-docker-image-location-for-releases&#34;&gt;Calculation of docker image location for releases&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#variables-to-quarks-secrets&#34;&gt;Variables to Quarks Secrets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#overriding-generated-variables&#34;&gt;Overriding generated variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#instance-groups-to-quarks-statefulsets-and-jobs&#34;&gt;Instance Groups to Quarks StatefulSets and Jobs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#bosh-services-vs-bosh-errands&#34;&gt;BOSH Services vs BOSH Errands&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#miscellaneous&#34;&gt;Miscellaneous&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#miscellaneous&#34;&gt;Miscellaneous&lt;/a&gt;
+
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#dealing-with-azs&#34;&gt;Dealing with AZs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#support-for-activepassive-pod-replicas&#34;&gt;Support for active/passive pod replicas&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#ephemeral-disks&#34;&gt;Ephemeral Disks&lt;/a&gt;&lt;/li&gt;
@@ -1340,12 +1339,12 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 &lt;li&gt;&lt;a href=&#34;#running-manual-errands&#34;&gt;Running manual errands&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#readiness-and-liveness-probes&#34;&gt;Readiness and Liveness Probes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#persistent-disks&#34;&gt;Persistent Disks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#manual-%22implicit%22-variables&#34;&gt;Manual (&amp;ldquo;implicit&amp;rdquo;) variables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#prerenderscripts&#34;&gt;Pre_render_scripts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#manual-implicit-variables&#34;&gt;Manual (&amp;ldquo;implicit&amp;rdquo;) variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pre_render_scripts&#34;&gt;Pre_render_scripts&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#bosh-dns&#34;&gt;BOSH DNS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#flow&#34;&gt;Flow&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#naming-conventions&#34;&gt;Naming Conventions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&#34;open-questions&#34;&gt;Open Questions&lt;/h2&gt;
@@ -1619,6 +1618,16 @@ The assets will be copied into a &amp;lsquo;release&amp;rsquo; folder on S3.&lt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;labels&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Annotations to add to the resources representing the instance group&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;annotations&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;{}&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Ops files that are applied on top of instance group properties yaml or BPM data yaml&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;preRenderOps&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;bpm&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;replace&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;path&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/foo&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;value&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;bar&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;instanceGroup&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;            &lt;/span&gt;-&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;type&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;replace&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;path&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;/foo&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;              &lt;/span&gt;value&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;bar&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# disable_log_sidecar is an option to disable log sidecar&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;disable_log_sidecar&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# serviceAccountName is the name of the ServiceAccount to use to run this pod.&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
