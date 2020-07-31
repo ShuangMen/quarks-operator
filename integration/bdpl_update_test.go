@@ -250,6 +250,47 @@ var _ = Describe("BDPL updates", func() {
 		})
 	})
 
+	Context("when updating a deployment with a addon", func() {
+		opDNS := `- type: replace
+  path: /addons/name=bosh-dns-aliases/jobs/name=bosh-dns-aliases/properties/aliases/domain=nats.service.cf.internal/targets/instance_group=nats/instance_group
+  value: natsv2
+`
+		BeforeEach(func() {
+			tearDown, err := env.CreateConfigMap(env.Namespace, env.BOSHManifestConfigMap(manifestName, bm.NatsAddOn))
+			Expect(err).NotTo(HaveOccurred())
+			tearDowns = append(tearDowns, tearDown)
+
+			_, tearDown, err = env.CreateBOSHDeployment(env.Namespace, env.DefaultBOSHDeployment(deploymentName, manifestName))
+			Expect(err).NotTo(HaveOccurred())
+			tearDowns = append(tearDowns, tearDown)
+
+			By("checking for instance group pods")
+			err = env.WaitForInstanceGroup(env.Namespace, deploymentName, "nats", "1", 2)
+			Expect(err).NotTo(HaveOccurred(), "error waiting for instance group pods from deployment")
+		})
+
+		Context("by adding an ops file to the bdpl custom resource", func() {
+			BeforeEach(func() {
+				tearDown, err := env.CreateConfigMap(env.Namespace, env.CustomOpsConfigMap("dns-ops", opDNS))
+				Expect(err).NotTo(HaveOccurred())
+				tearDowns = append(tearDowns, tearDown)
+
+				bdpl, err := env.GetBOSHDeployment(env.Namespace, deploymentName)
+				Expect(err).NotTo(HaveOccurred())
+				bdpl.Spec.Ops = []bdv1.ResourceReference{{Name: "dns-ops", Type: bdv1.ConfigMapReference}}
+
+				_, _, err = env.UpdateBOSHDeployment(env.Namespace, *bdpl)
+				Expect(err).NotTo(HaveOccurred())
+			})
+
+			FIt("should update the dns pods and not nats", func() {
+				time.Sleep(100 * time.Second)
+				//err := env.WaitForInstanceGroupVersions(env.Namespace, deploymentName, "nats", 1, "2", "3")
+				//Expect(err).NotTo(HaveOccurred(), "error waiting for instance group pods from deployment")*/
+			})
+		})
+	})
+
 	Context("when updating a deployment which uses ops files", func() {
 		opOneInstance := `- type: replace
   path: /instance_groups/name=quarks-gora?/instances

@@ -93,6 +93,15 @@ func (e *Environment) setupCFOperator() (manager.Manager, error) {
 		return nil, errors.Errorf("required environment variable DOCKER_IMAGE_TAG not set")
 	}
 
+	err = os.Setenv("CLUSTER_DOMAIN", "cluster.local")
+	if err != nil {
+		return nil, err
+	}
+	err = os.Setenv("BOSH_DNS_DOCKER_IMAGE", "cfcontainerization/coredns:0.1.0-1.6.7-bp152.1.8")
+	if err != nil {
+		return nil, err
+	}
+
 	err = operatorimage.SetupOperatorDockerImage(dockerImageOrg, dockerImageRepo, dockerImageTag, corev1.PullIfNotPresent)
 	if err != nil {
 		return nil, err
