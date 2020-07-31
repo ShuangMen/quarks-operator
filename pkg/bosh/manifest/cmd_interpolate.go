@@ -1,20 +1,23 @@
 package manifest
 
 import (
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	"github.com/SUSE/go-patch/patch"
 	"github.com/pkg/errors"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	boshtpl "github.com/cloudfoundry/bosh-cli/director/template"
 )
 
 // InterpolateFromSecretMounts reads explicit secrets from a folder and writes an interpolated manifest to the output.json file in /mnt/quarks volume mount.
-func InterpolateFromSecretMounts(boshManifestBytes []byte, variablesDir string, outputFilePath string) error {
+func InterpolateFromSecretMounts(ctx context.Context, namespace string, clientSet client.Client, boshManifestBytes []byte, variablesDir string, outputFilePath string) error {
 	var vars []boshtpl.Variables
 
 	variables, err := ioutil.ReadDir(variablesDir)
@@ -71,6 +74,22 @@ func InterpolateFromSecretMounts(boshManifestBytes []byte, variablesDir string, 
 	})
 	if err != nil {
 		return errors.Wrapf(err, "could not marshal json output")
+	}
+
+	// Refactor later
+	manifest, err := bdm.LoadYAML(yamlBytes)
+	if err != nil {
+		return errors.Wrapf(err, "could not marshal json output")
+	}
+
+	dns, err := boshdns.New(manifest)
+	if err != nil {
+		return err
+	}
+
+	err = dns.Apply(ctx, namespace, clientSet)
+	if err != nil {
+		return err
 	}
 
 	err = ioutil.WriteFile(outputFilePath, jsonBytes, 0644)

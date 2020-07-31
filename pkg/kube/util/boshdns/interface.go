@@ -4,10 +4,9 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 )
@@ -18,7 +17,7 @@ type DomainNameService interface {
 	DNSSetting(namespace string) (corev1.DNSPolicy, *corev1.PodDNSConfig, error)
 
 	// Apply a DNS server to the given namespace, if required.
-	Apply(ctx context.Context, namespace string, c client.Client, setOwner func(object metav1.Object) error) error
+	Apply(ctx context.Context, namespace string, c client.Client) error
 }
 
 // New returns the DNS service management struct

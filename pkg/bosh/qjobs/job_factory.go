@@ -147,6 +147,10 @@ func (f *JobFactory) VariableInterpolationJob(namespace string, deploymentName s
 											Name:  EnvOutputFilePath,
 											Value: filepath.Join(EnvOutputFilePathValue, outputFilename),
 										},
+										{
+											Name:  EnvCFONamespace,
+											Value: namespace,
+										},
 									},
 								},
 							},

@@ -12,10 +12,8 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"sigs.k8s.io/controller-runtime/pkg/client"
-	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/mutate"
 )
 
 const (
@@ -100,7 +98,7 @@ func (dns *BoshDomainNameService) DNSSetting(namespace string) (corev1.DNSPolicy
 }
 
 // Apply DNS k8s resources. This deploys CoreDNS with our DNS records in a config map.
-func (dns *BoshDomainNameService) Apply(ctx context.Context, namespace string, c client.Client, setOwner func(object metav1.Object) error) error {
+func (dns *BoshDomainNameService) Apply(ctx context.Context, namespace string, c client.Client) error {
 	const volumeName = "bosh-dns-volume"
 	const coreConfigFile = "Corefile"
 
@@ -208,42 +206,52 @@ func (dns *BoshDomainNameService) Apply(ctx context.Context, namespace string, c
 			},
 		},
 	}
+
+	// TODO
+	// Fetch the boshdeployment and set owner
 	for _, obj := range []metav1.Object{&configMap, &deployment, &service} {
 		if err := setOwner(obj); err != nil {
 			return err
 		}
 	}
 
-	if _, err := controllerutil.CreateOrUpdate(ctx, c, &configMap, configMapMutateFn(&configMap)); err != nil {
-		return err
+	_, err := c.CoreV1().Secrets(namespace).Create(ctx, configMap, metav1.CreateOptions{})
+	if err != nil {
+		if apierrors.IsAlreadyExists(err) {
+			// If it exists update it
+			_, err = c.CoreV1().Secrets(namespace).Update(ctx, configMap, metav1.UpdateOptions{})
+			if err != nil {
+				return errors.Wrapf(err, "failed to update configmap '%s'", name)
+			}
+		} else {
+			return errors.Wrapf(err, "failed to update configmap '%s'", name)
+		}
 	}
-	if _, err := controllerutil.CreateOrUpdate(ctx, c, &deployment, deploymentMapMutateFn(&deployment)); err != nil {
-		return err
+	_, err := c.CoreV1().Deployment(namespace).Create(ctx, deployment, metav1.CreateOptions{})
+	if err != nil {
+		if apierrors.IsAlreadyExists(err) {
+			// If it exists update it
+			_, err = c.CoreV1().Deployment(namespace).Update(ctx, deployment, metav1.UpdateOptions{})
+			if err != nil {
+				return errors.Wrapf(err, "failed to update deployment '%s'", name)
+			}
+		} else {
+			return errors.Wrapf(err, "failed to update deployment '%s'", name)
+		}
 	}
-	if _, err := controllerutil.CreateOrUpdate(ctx, c, &service, mutate.ServiceMutateFn(&service)); err != nil {
-		return err
+	_, err := c.CoreV1().Service(namespace).Create(ctx, service, metav1.CreateOptions{})
+	if err != nil {
+		if apierrors.IsAlreadyExists(err) {
+			// If it exists update it
+			_, err = c.CoreV1().Service(namespace).Update(ctx, service, metav1.UpdateOptions{})
+			if err != nil {
+				return errors.Wrapf(err, "failed to update service '%s'", name)
+			}
+		} else {
+			return errors.Wrapf(err, "failed to update service '%s'", name)
+		}
 	}
 
 	dns.LocalDNSIP = service.Spec.ClusterIP
 	return nil
-}
-
-func configMapMutateFn(configMap *corev1.ConfigMap) controllerutil.MutateFn {
-	updated := configMap.DeepCopy()
-	return func() error {
-		configMap.Labels = updated.Labels
-		configMap.Annotations = updated.Annotations
-		configMap.Data = updated.Data
-		return nil
-	}
-}
-
-func deploymentMapMutateFn(deployment *appsv1.Deployment) controllerutil.MutateFn {
-	updated := deployment.DeepCopy()
-	return func() error {
-		deployment.Labels = updated.Labels
-		deployment.Annotations = updated.Annotations
-		deployment.Spec = updated.Spec
-		return nil
-	}
 }
