@@ -1,11 +1,10 @@
-package boshdns
+package simpledns
 
 import (
 	"context"
 
 	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"sigs.k8s.io/controller-runtime/pkg/client"
+	"k8s.io/client-go/kubernetes"
 )
 
 // SimpleDomainNameService emulates old behaviour without BOSH DNS.
@@ -23,6 +22,6 @@ func (dns *SimpleDomainNameService) DNSSetting(_ string) (corev1.DNSPolicy, *cor
 }
 
 // Apply is not required for the simple domain service.
-func (dns *SimpleDomainNameService) Apply(ctx context.Context, namespace string, c client.Client, setOwner func(object metav1.Object) error) error {
+func (dns *SimpleDomainNameService) Apply(ctx context.Context, namespace string, c kubernetes.Interface) error {
 	return nil
 }

@@ -13,9 +13,9 @@ import (
 	crc "sigs.k8s.io/controller-runtime/pkg/client"
 
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/converter"
+	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 )
 
 func matchDeployment(name string) crc.MatchingLabels {
@@ -178,7 +178,7 @@ func serviceRecordByProvider(ctx context.Context, client crc.Client, namespace s
 			svcRecords[providerName] = serviceRecord{
 				addresses: nil,
 				selector:  nil,
-				dnsRecord: fmt.Sprintf("%s.%s.svc.%s", svc.Name, namespace, boshdns.GetClusterDomain()),
+				dnsRecord: fmt.Sprintf("%s.%s.svc.%s", svc.Name, namespace, manifest.GetClusterDomain()),
 			}
 
 			continue
@@ -189,7 +189,7 @@ func serviceRecordByProvider(ctx context.Context, client crc.Client, namespace s
 			svcRecords[providerName] = serviceRecord{
 				addresses: nil,
 				selector:  svc.Spec.Selector,
-				dnsRecord: fmt.Sprintf("%s.%s.svc.%s", svc.Name, namespace, boshdns.GetClusterDomain()),
+				dnsRecord: fmt.Sprintf("%s.%s.svc.%s", svc.Name, namespace, manifest.GetClusterDomain()),
 			}
 
 			continue
@@ -211,7 +211,7 @@ func serviceRecordByProvider(ctx context.Context, client crc.Client, namespace s
 		svcRecords[providerName] = serviceRecord{
 			addresses: addresses,
 			selector:  nil,
-			dnsRecord: fmt.Sprintf("%s.%s.svc.%s", svc.Name, namespace, boshdns.GetClusterDomain()),
+			dnsRecord: fmt.Sprintf("%s.%s.svc.%s", svc.Name, namespace, manifest.GetClusterDomain()),
 		}
 	}
 

@@ -1,4 +1,4 @@
-package boshdns
+package manifest
 
 import (
 	"context"
@@ -9,11 +9,10 @@ import (
 
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
-	"sigs.k8s.io/controller-runtime/pkg/client"
-
-	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
+	"k8s.io/client-go/kubernetes"
 )
 
 const (
@@ -59,11 +58,11 @@ type Alias struct {
 type BoshDomainNameService struct {
 	Aliases        []Alias
 	LocalDNSIP     string
-	InstanceGroups bdm.InstanceGroups
+	InstanceGroups InstanceGroups
 }
 
 // NewBoshDomainNameService create a new DomainNameService to setup BOSH DNS.
-func NewBoshDomainNameService(addOn *bdm.AddOn, instanceGroups bdm.InstanceGroups) (*BoshDomainNameService, error) {
+func NewBoshDomainNameService(addOn *AddOn, instanceGroups InstanceGroups) (*BoshDomainNameService, error) {
 	dns := BoshDomainNameService{
 		InstanceGroups: instanceGroups,
 	}
@@ -98,7 +97,7 @@ func (dns *BoshDomainNameService) DNSSetting(namespace string) (corev1.DNSPolicy
 }
 
 // Apply DNS k8s resources. This deploys CoreDNS with our DNS records in a config map.
-func (dns *BoshDomainNameService) Apply(ctx context.Context, namespace string, c client.Client) error {
+func (dns *BoshDomainNameService) Apply(ctx context.Context, namespace string, c kubernetes.Interface) error {
 	const volumeName = "bosh-dns-volume"
 	const coreConfigFile = "Corefile"
 
@@ -209,46 +208,46 @@ func (dns *BoshDomainNameService) Apply(ctx context.Context, namespace string, c
 
 	// TODO
 	// Fetch the boshdeployment and set owner
-	for _, obj := range []metav1.Object{&configMap, &deployment, &service} {
-		if err := setOwner(obj); err != nil {
-			return err
-		}
-	}
+	//for _, obj := range []metav1.Object{&configMap, &deployment, &service} {
+	//	if err := setOwner(obj); err != nil {
+	//		return err
+	//	}
+	//}
 
-	_, err := c.CoreV1().Secrets(namespace).Create(ctx, configMap, metav1.CreateOptions{})
+	_, err = c.CoreV1().ConfigMaps(namespace).Create(ctx, &configMap, metav1.CreateOptions{})
 	if err != nil {
 		if apierrors.IsAlreadyExists(err) {
 			// If it exists update it
-			_, err = c.CoreV1().Secrets(namespace).Update(ctx, configMap, metav1.UpdateOptions{})
+			_, err = c.CoreV1().ConfigMaps(namespace).Update(ctx, &configMap, metav1.UpdateOptions{})
 			if err != nil {
-				return errors.Wrapf(err, "failed to update configmap '%s'", name)
+				return errors.Wrapf(err, "failed to update configmap '%s'", configMap.Name)
 			}
 		} else {
-			return errors.Wrapf(err, "failed to update configmap '%s'", name)
+			return errors.Wrapf(err, "failed to update configmap '%s'", configMap.Name)
 		}
 	}
-	_, err := c.CoreV1().Deployment(namespace).Create(ctx, deployment, metav1.CreateOptions{})
+	_, err = c.AppsV1().Deployments(namespace).Create(ctx, &deployment, metav1.CreateOptions{})
 	if err != nil {
 		if apierrors.IsAlreadyExists(err) {
 			// If it exists update it
-			_, err = c.CoreV1().Deployment(namespace).Update(ctx, deployment, metav1.UpdateOptions{})
+			_, err = c.AppsV1().Deployments(namespace).Update(ctx, &deployment, metav1.UpdateOptions{})
 			if err != nil {
-				return errors.Wrapf(err, "failed to update deployment '%s'", name)
+				return errors.Wrapf(err, "failed to update deployment '%s'", deployment.Name)
 			}
 		} else {
-			return errors.Wrapf(err, "failed to update deployment '%s'", name)
+			return errors.Wrapf(err, "failed to update deployment '%s'", deployment.Name)
 		}
 	}
-	_, err := c.CoreV1().Service(namespace).Create(ctx, service, metav1.CreateOptions{})
+	_, err = c.CoreV1().Services(namespace).Create(ctx, &service, metav1.CreateOptions{})
 	if err != nil {
 		if apierrors.IsAlreadyExists(err) {
 			// If it exists update it
-			_, err = c.CoreV1().Service(namespace).Update(ctx, service, metav1.UpdateOptions{})
+			_, err = c.CoreV1().Services(namespace).Update(ctx, &service, metav1.UpdateOptions{})
 			if err != nil {
-				return errors.Wrapf(err, "failed to update service '%s'", name)
+				return errors.Wrapf(err, "failed to update service '%s'", service.Name)
 			}
 		} else {
-			return errors.Wrapf(err, "failed to update service '%s'", name)
+			return errors.Wrapf(err, "failed to update service '%s'", service.Name)
 		}
 	}
 

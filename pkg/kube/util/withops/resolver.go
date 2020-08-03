@@ -15,7 +15,6 @@ import (
 
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/names"
 	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
 	"code.cloudfoundry.org/quarks-utils/pkg/logger"
@@ -161,7 +160,7 @@ func (r *Resolver) Manifest(ctx context.Context, bdpl *bdv1.BOSHDeployment, name
 		return nil, []string{}, errors.Wrapf(err, "Loading yaml failed in interpolation task after applying user explicit vars %#v", m)
 	}
 
-	err = boshdns.Validate(*manifest)
+	err = bdm.Validate(*manifest)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -289,7 +288,7 @@ func (r *Resolver) ManifestDetailed(ctx context.Context, bdpl *bdv1.BOSHDeployme
 		return nil, []string{}, errors.Wrapf(err, "Loading yaml failed in interpolation task after applying user explicit vars %#v", m)
 	}
 
-	err = boshdns.Validate(*manifest)
+	err = bdm.Validate(*manifest)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -1,4 +1,4 @@
-package boshdns_test
+package manifest_test
 
 import (
 	"context"
@@ -14,9 +14,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
 
-	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	cfakes "code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/fakes"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 )
 
 const boshDNSAddOn = `
@@ -142,8 +140,8 @@ const boshDNSAddOn = `
 }
 `
 
-func loadAddOn() *manifest.AddOn {
-	var addOn manifest.AddOn
+func loadAddOn() *AddOn {
+	var addOn AddOn
 	err := json.Unmarshal([]byte(boshDNSAddOn), &addOn)
 	if err != nil {
 		// This should never happen, because boshDNSAddOn is a constant
@@ -160,10 +158,10 @@ var _ = Describe("BoshDomainNameService", func() {
 		)
 
 		BeforeEach(func() {
-			igs := manifest.InstanceGroups{
-				&manifest.InstanceGroup{Name: "scheduler", AZs: []string{"az1", "az2"}},
-				&manifest.InstanceGroup{Name: "diego-api", AZs: []string{"az1", "az2"}},
-				&manifest.InstanceGroup{Name: "bits", AZs: []string{"az1", "az2"}},
+			igs := InstanceGroups{
+				&InstanceGroup{Name: "scheduler", AZs: []string{"az1", "az2"}},
+				&InstanceGroup{Name: "diego-api", AZs: []string{"az1", "az2"}},
+				&InstanceGroup{Name: "bits", AZs: []string{"az1", "az2"}},
 			}
 			var err error
 			dns, err = boshdns.NewBoshDomainNameService(loadAddOn(), igs)

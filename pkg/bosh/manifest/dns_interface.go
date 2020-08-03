@@ -1,14 +1,13 @@
-package boshdns
+package manifest
 
 import (
 	"context"
 
+	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/simpledns"
 	"github.com/pkg/errors"
-	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	corev1 "k8s.io/api/core/v1"
-
-	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
+	"k8s.io/client-go/kubernetes"
 )
 
 // DomainNameService abstraction.
@@ -17,13 +16,13 @@ type DomainNameService interface {
 	DNSSetting(namespace string) (corev1.DNSPolicy, *corev1.PodDNSConfig, error)
 
 	// Apply a DNS server to the given namespace, if required.
-	Apply(ctx context.Context, namespace string, c client.Client) error
+	Apply(ctx context.Context, namespace string, c kubernetes.Interface) error
 }
 
-// New returns the DNS service management struct
-func New(m bdm.Manifest) (DomainNameService, error) {
+// NewDNS returns the DNS service management struct
+func NewDNS(m Manifest) (DomainNameService, error) {
 	for _, addon := range m.AddOns {
-		if addon.Name == bdm.BoshDNSAddOnName {
+		if addon.Name == BoshDNSAddOnName {
 			var err error
 			dns, err := NewBoshDomainNameService(addon, m.InstanceGroups)
 			if err != nil {
@@ -33,11 +32,11 @@ func New(m bdm.Manifest) (DomainNameService, error) {
 		}
 	}
 
-	return NewSimpleDomainNameService(), nil
+	return simpledns.NewSimpleDomainNameService(), nil
 }
 
 // Validate that all job properties of the addon section can be decoded
-func Validate(m bdm.Manifest) error {
-	_, err := New(m)
+func Validate(m Manifest) error {
+	_, err := NewDNS(m)
 	return err
 }

@@ -21,7 +21,6 @@ import (
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/bpmconverter"
 	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/mutate"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/names"
 	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
@@ -34,7 +33,7 @@ import (
 
 // BPMConverter converts k8s resources from single BOSH manifest
 type BPMConverter interface {
-	Resources(namespace string, manifestName string, dns bpmconverter.DNSSettings, qStsVersion string, instanceGroup *bdm.InstanceGroup, releaseImageProvider bdm.ReleaseImageProvider, bpmConfigs bpm.Configs, igResolvedSecretVersion string) (*bpmconverter.Resources, error)
+	Resources(namespace string, manifestName string, qStsVersion string, instanceGroup *bdm.InstanceGroup, releaseImageProvider bdm.ReleaseImageProvider, bpmConfigs bpm.Configs, igResolvedSecretVersion string) (*bpmconverter.Resources, error)
 }
 
 // DesiredManifest unmarshals desired manifest from the manifest secret
@@ -126,7 +125,7 @@ func (r *ReconcileBPM) Reconcile(request reconcile.Request) (reconcile.Result, e
 	}
 
 	// Apply BPM information
-	resources, err := r.applyBPMResources(bdpl.Name, instanceGroupName, bpmSecret, manifest, dns)
+	resources, err := r.applyBPMResources(bdpl.Name, instanceGroupName, bpmSecret, manifest)
 	if err != nil {
 		return reconcile.Result{},
 			log.WithEvent(bpmSecret, "BPMApplyingError").Errorf(ctx, "Failed to apply BPM information: %v", err)
@@ -154,7 +153,7 @@ func (r *ReconcileBPM) Reconcile(request reconcile.Request) (reconcile.Result, e
 	return reconcile.Result{}, nil
 }
 
-func (r *ReconcileBPM) applyBPMResources(bdplName string, instanceGroupName string, bpmSecret *corev1.Secret, manifest *bdm.Manifest, dns boshdns.DomainNameService) (*bpmconverter.Resources, error) {
+func (r *ReconcileBPM) applyBPMResources(bdplName string, instanceGroupName string, bpmSecret *corev1.Secret, manifest *bdm.Manifest) (*bpmconverter.Resources, error) {
 	var bpmInfo bdm.BPMInfo
 	if val, ok := bpmSecret.Data["bpm.yaml"]; ok {
 		err := yaml.Unmarshal(val, &bpmInfo)
@@ -195,7 +194,7 @@ func (r *ReconcileBPM) applyBPMResources(bdplName string, instanceGroupName stri
 		return nil, err
 	}
 
-	resources, err := r.converter.Resources(bpmSecret.Namespace, bdplName, dns, qStsVersionString, instanceGroup, manifest, bpmInfo.Configs, igResolvedSecretVersion)
+	resources, err := r.converter.Resources(bpmSecret.Namespace, bdplName, qStsVersionString, instanceGroup, manifest, bpmInfo.Configs, igResolvedSecretVersion)
 	if err != nil {
 		return resources, err
 	}

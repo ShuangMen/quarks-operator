@@ -17,7 +17,6 @@ import (
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/bpmconverter/fakes"
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	"code.cloudfoundry.org/quarks-operator/testing"
 	"code.cloudfoundry.org/quarks-operator/testing/boshreleases"
 	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
@@ -53,7 +52,7 @@ var _ = Describe("BPM Converter", func() {
 			m, err = env.DefaultBOSHManifest()
 			Expect(err).NotTo(HaveOccurred())
 
-			dns, err = boshdns.New(*m)
+			dns, err = manifest.New(*m)
 			Expect(err).NotTo(HaveOccurred())
 
 			volumeFactory = &fakes.FakeVolumeFactory{}

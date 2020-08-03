@@ -1,4 +1,4 @@
-package boshdns
+package manifest
 
 import (
 	"fmt"
@@ -8,11 +8,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	bdm "code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/names"
 )
 
-func createCorefile(namespace string, instanceGroups bdm.InstanceGroups, aliases []Alias) (string, error) {
+func createCorefile(namespace string, instanceGroups InstanceGroups, aliases []Alias) (string, error) {
 	rewrites := make([]string, 0)
 	for _, alias := range aliases {
 		for _, target := range alias.Targets {
@@ -62,7 +61,7 @@ func gatherSimpleRewrites(rewrites []string,
 }
 
 func gatherAllRewrites(rewrites []string,
-	instanceGroup bdm.InstanceGroup,
+	instanceGroup InstanceGroup,
 	target Target,
 	namespace string,
 	alias Alias) []string {
@@ -97,7 +96,7 @@ func gatherAllRewrites(rewrites []string,
 }
 
 func gatherRewritesForInstances(rewrites []string,
-	instanceGroup bdm.InstanceGroup,
+	instanceGroup InstanceGroup,
 	target Target,
 	namespace string,
 	azIndex int,

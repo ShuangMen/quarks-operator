@@ -16,8 +16,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/manager/signals"
 
+	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/operator"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/operatorimage"
 	"code.cloudfoundry.org/quarks-operator/version"
 	"code.cloudfoundry.org/quarks-utils/pkg/cmd"
@@ -68,8 +68,8 @@ var rootCmd = &cobra.Command{
 		cmd.OperatorNamespace(cfg, log, "cf-operator-namespace")
 		cmd.MonitoredID(cfg)
 
-		boshdns.SetBoshDNSDockerImage(viper.GetString("bosh-dns-docker-image"))
-		boshdns.SetClusterDomain(viper.GetString("cluster-domain"))
+		manifest.SetBoshDNSDockerImage(viper.GetString("bosh-dns-docker-image"))
+		manifest.SetClusterDomain(viper.GetString("cluster-domain"))
 
 		log.Infof("Starting cf-operator %s, monitoring namespaces labeled with '%s'", version.Version, cfg.MonitoredID)
 		log.Infof("cf-operator docker image: %s", config.GetOperatorDockerImage())

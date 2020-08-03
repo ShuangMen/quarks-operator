@@ -13,7 +13,6 @@ import (
 	"k8s.io/client-go/kubernetes"
 
 	"code.cloudfoundry.org/quarks-operator/pkg/bosh/manifest"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/client/clientset/versioned"
 	"code.cloudfoundry.org/quarks-utils/pkg/cmd"
 	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
 	"code.cloudfoundry.org/quarks-utils/pkg/kubeconfig"
@@ -84,7 +83,7 @@ interpolated manifest to STDOUT
 		defer log.Sync()
 
 		// Authenticate with the cluster
-		clientSet, versionedClientSet, err := authenticateInCluster(log)
+		clientSet, err := authenticateInCluster(log)
 		if err != nil {
 			return err
 		}
@@ -117,24 +116,19 @@ func init() {
 }
 
 // authenticateInCluster authenticates with the in cluster and returns the client
-func authenticateInCluster(log *zap.SugaredLogger) (*kubernetes.Clientset, *versioned.Clientset, error) {
+func authenticateInCluster(log *zap.SugaredLogger) (*kubernetes.Clientset, error) {
 	config, err := kubeconfig.NewGetter(log).Get("")
 	if err != nil {
-		return nil, nil, errors.Wrapf(err, "Couldn't fetch Kubeconfig. Ensure kubeconfig is present to continue.")
+		return nil, errors.Wrapf(err, "Couldn't fetch Kubeconfig. Ensure kubeconfig is present to continue.")
 	}
 	if err := kubeconfig.NewChecker(log).Check(config); err != nil {
-		return nil, nil, errors.Wrapf(err, "Couldn't check Kubeconfig. Ensure kubeconfig is correct to continue.")
+		return nil, errors.Wrapf(err, "Couldn't check Kubeconfig. Ensure kubeconfig is correct to continue.")
 	}
 
-	clientSet, err := controllerutil.kubernetes.NewForConfig(config)
+	clientSet, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		return nil, nil, errors.Wrapf(err, "failed to create clientset with incluster config")
+		return nil, errors.Wrapf(err, "failed to create clientset with incluster config")
 	}
 
-	versionedClientSet, err := versioned.NewForConfig(config)
-	if err != nil {
-		return nil, nil, errors.Wrapf(err, "failed to create versioned clientset with incluster config")
-	}
-
-	return clientSet, versionedClientSet, nil
+	return clientSet, nil
 }

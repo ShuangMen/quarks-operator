@@ -51,12 +51,6 @@ type VolumeFactory interface {
 	GenerateBPMDisks(instanceGroup *bdm.InstanceGroup, bpmConfigs bpm.Configs, namespace string) (bdm.Disks, error)
 }
 
-// DNSSettings is a limited interface for the funcs used in the bpm converter
-type DNSSettings interface {
-	// DNSSetting get the DNS settings for POD.
-	DNSSetting(namespace string) (corev1.DNSPolicy, *corev1.PodDNSConfig, error)
-}
-
 // NewConverter returns a new converter
 func NewConverter(volumeFactory VolumeFactory, newContainerFactoryFunc NewContainerFactoryFunc) *BPMConverter {
 	return &BPMConverter{
@@ -87,7 +81,7 @@ func FilterLabels(labels map[string]string) map[string]string {
 
 // Resources uses BOSH Process Manager information to create k8s container specs from single BOSH instance group.
 // It returns quarks stateful sets, services and quarks jobs.
-func (kc *BPMConverter) Resources(namespace string, deploymentName string, dns DNSSettings, qStsVersion string, instanceGroup *bdm.InstanceGroup, releaseImageProvider bdm.ReleaseImageProvider, bpmConfigs bpm.Configs, igResolvedSecretVersion string) (*Resources, error) {
+func (kc *BPMConverter) Resources(namespace string, deploymentName string, qStsVersion string, instanceGroup *bdm.InstanceGroup, releaseImageProvider bdm.ReleaseImageProvider, bpmConfigs bpm.Configs, igResolvedSecretVersion string) (*Resources, error) {
 	instanceGroup.Env.AgentEnvBoshConfig.Agent.Settings.Set(deploymentName, instanceGroup.Name, qStsVersion)
 
 	defaultDisks := kc.volumeFactory.GenerateDefaultDisks(instanceGroup, igResolvedSecretVersion, namespace)
@@ -115,7 +109,7 @@ func (kc *BPMConverter) Resources(namespace string, deploymentName string, dns D
 
 	switch instanceGroup.LifeCycle {
 	case bdm.IGTypeService, "":
-		convertedExtStatefulSet, err := kc.serviceToQuarksStatefulSet(namespace, cfac, dns, instanceGroup, defaultDisks, bpmDisks, bpmConfigs.ActivePassiveProbes())
+		convertedExtStatefulSet, err := kc.serviceToQuarksStatefulSet(namespace, cfac, instanceGroup, defaultDisks, bpmDisks, bpmConfigs.ActivePassiveProbes())
 		if err != nil {
 			return nil, err
 		}
@@ -127,7 +121,7 @@ func (kc *BPMConverter) Resources(namespace string, deploymentName string, dns D
 
 		res.InstanceGroups = append(res.InstanceGroups, convertedExtStatefulSet)
 	case bdm.IGTypeErrand, bdm.IGTypeAutoErrand:
-		convertedQJob, err := kc.errandToQuarksJob(namespace, cfac, dns, instanceGroup, defaultDisks, bpmDisks)
+		convertedQJob, err := kc.errandToQuarksJob(namespace, cfac, instanceGroup, defaultDisks, bpmDisks)
 		if err != nil {
 			return nil, err
 		}
@@ -142,7 +136,6 @@ func (kc *BPMConverter) Resources(namespace string, deploymentName string, dns D
 func (kc *BPMConverter) serviceToQuarksStatefulSet(
 	namespace string,
 	cfac ContainerFactory,
-	dns DNSSettings,
 	instanceGroup *bdm.InstanceGroup,
 	defaultDisks bdm.Disks,
 	bpmDisks bdm.Disks,
@@ -223,10 +216,12 @@ func (kc *BPMConverter) serviceToQuarksStatefulSet(
 	}
 
 	spec := &extSts.Spec.Template.Spec.Template.Spec
-	spec.DNSPolicy, spec.DNSConfig, err = dns.DNSSetting(namespace)
-	if err != nil {
-		return qstsv1a1.QuarksStatefulSet{}, err
-	}
+	// TODO set the DNSPolicy after fetching the service ip of bosh dns.
+	spec.DNSPolicy, spec.DNSConfig, err = corev1.DNSClusterFirst, nil, nil
+
+	//	if err != nil {
+	//	return qstsv1a1.QuarksStatefulSet{}, err
+	//	}
 
 	if len(instanceGroup.Env.AgentEnvBoshConfig.Agent.Settings.Tolerations) > 0 {
 		extSts.Spec.Template.Spec.Template.Spec.Tolerations = instanceGroup.Env.AgentEnvBoshConfig.Agent.Settings.Tolerations
@@ -310,7 +305,6 @@ func (kc *BPMConverter) serviceToKubeServices(namespace string, deploymentName s
 func (kc *BPMConverter) errandToQuarksJob(
 	namespace string,
 	cfac ContainerFactory,
-	dns DNSSettings,
 	instanceGroup *bdm.InstanceGroup,
 	defaultDisks bdm.Disks,
 	bpmDisks bdm.Disks,
@@ -381,11 +375,11 @@ func (kc *BPMConverter) errandToQuarksJob(
 		},
 	}
 
-	qJob.Spec.Template.Spec.Template.Spec.DNSPolicy, qJob.Spec.Template.Spec.Template.Spec.DNSConfig, err = dns.DNSSetting(namespace)
-
-	if err != nil {
-		return qjv1a1.QuarksJob{}, err
-	}
+	qJob.Spec.Template.Spec.Template.Spec.DNSPolicy, qJob.Spec.Template.Spec.Template.Spec.DNSConfig, err = corev1.DNSClusterFirst, nil, nil
+	// TODO Fetch service ip and then assign appropraite
+	//	if err != nil {
+	//		return qjv1a1.QuarksJob{}, err
+	//	}
 
 	if instanceGroup.Env.AgentEnvBoshConfig.Agent.Settings.Affinity != nil {
 		qJob.Spec.Template.Spec.Template.Spec.Affinity = instanceGroup.Env.AgentEnvBoshConfig.Agent.Settings.Affinity

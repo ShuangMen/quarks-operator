@@ -1,4 +1,4 @@
-package boshdns_test
+package simpledns_test
 
 import (
 	"testing"
@@ -9,5 +9,5 @@ import (
 
 func TestManifest(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "BOSH DNS Suite")
+	RunSpecs(t, "Simple DNS Suite")
 }

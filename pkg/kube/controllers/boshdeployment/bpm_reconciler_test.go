@@ -29,7 +29,6 @@ import (
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers"
 	cfd "code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/boshdeployment"
 	"code.cloudfoundry.org/quarks-operator/pkg/kube/controllers/fakes"
-	"code.cloudfoundry.org/quarks-operator/pkg/kube/util/boshdns"
 	cfcfg "code.cloudfoundry.org/quarks-utils/pkg/config"
 	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
 	"code.cloudfoundry.org/quarks-utils/pkg/versionedsecretstore"
