@@ -10,8 +10,8 @@ import (
 	corev1 "k8s.io/api/core/v1"
 
 	bdv1 "code.cloudfoundry.org/quarks-operator/pkg/kube/apis/boshdeployment/v1alpha1"
-	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
 	bm "code.cloudfoundry.org/quarks-operator/testing/boshmanifest"
+	qstsv1a1 "code.cloudfoundry.org/quarks-statefulset/pkg/kube/apis/quarksstatefulset/v1alpha1"
 	"code.cloudfoundry.org/quarks-utils/testing/machine"
 )
 
@@ -25,7 +25,7 @@ var _ = Describe("Lifecycle", func() {
 			boshDeployment = env.DefaultBOSHDeployment("test", "manifest")
 		})
 
-		It("should exercise a deployment lifecycle", func() {
+		FIt("should exercise a deployment lifecycle", func() {
 			// Create BOSH manifest in config map
 			tearDown, err := env.CreateConfigMap(env.Namespace, env.BOSHManifestConfigMap("manifest", bm.NatsSmall))
 			Expect(err).NotTo(HaveOccurred())
